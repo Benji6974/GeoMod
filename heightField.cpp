@@ -69,7 +69,7 @@ void HeightField::load(std::string img,vec2 a, vec2 b,float za, float zb){
 
 }
 
-HeightField::HeightField(int nx, int ny, vec2 a, vec2 b) : Array2(nx,ny,a,b){}
+HeightField::HeightField(int nx, int ny, vec2 a, vec2 b) : ScalarField(nx,ny,a,b){}
 
 void HeightField::save(){
 

@@ -15,9 +15,9 @@ public:
     double height(const double& x, const double& y);
     double heightGrid(int i,int j);
 
-    void load(QString img,vec2 a, vec2 b,float za, float zb);
+    void load(QString imgUrl, vec2 a, vec2  b, float za, float zb);
 
 protected:
-    double z[]; //Array of height
+    QVector<double> z; //Array of height
 };
 #endif // SCALARFIELD_H

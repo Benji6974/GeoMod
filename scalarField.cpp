@@ -2,12 +2,12 @@
 
 ScalarField::ScalarField()
 {
-
+    z = QVector<double>();
 }
 
 ScalarField::ScalarField(int nx, int ny, vec2 a, vec2 b): Array2(nx,ny,a,b)
 {
-
+    z = QVector<double>(nx*ny);
 }
 
 int ScalarField::index(int i,int j){
@@ -51,13 +51,15 @@ double ScalarField::height(const double& x, const double& y){
     }
 }
 
-void ScalarField::load(QString imgUrl,float za, float zb){
+void ScalarField::load(QString imgUrl, vec2 a, vec2  b, float za, float zb){
+
+    this->a = a;
+    this->b = b;
 
     QPixmap imgPix(imgUrl);
     QImage  img = imgPix.toImage();
 
-    img.scaledToHeight(ny);
-    img.scaledToWidth(nx);
+    img.scaled(nx,ny);
 
     for(int i = 0 ; i < this->nx ; i++)
     {
