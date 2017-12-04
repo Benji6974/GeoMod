@@ -5,11 +5,13 @@
 #include <string>
 
 
-class HightField : public Array2
+class HeightField : public Array2
 {
 public:
-    HightField();
+    HeightField();
+    HeightField(int nx, int ny, vec2 a, vec2 b);
     void load(std::string img,vec2 a, vec2 b,float za, float zb);
+    void save();
 
     // ajouter ici les fonctions de hauteur
 };

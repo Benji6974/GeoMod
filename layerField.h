@@ -8,10 +8,10 @@ public:
     LayerField();
 
 private:
-    HightField br; // couche bedrock
-    HightField sable; //couche de sable
-    HightField montagne; //couche montagne
-    HightField eau; // couche d'eau
+    HeightField br; // couche bedrock
+    HeightField sable; //couche de sable
+    HeightField montagne; //couche montagne
+    HeightField eau; // couche d'eau
 };
 
 #endif // LAYERFIELD_H

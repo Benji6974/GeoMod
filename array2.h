@@ -6,6 +6,8 @@ class Array2 : public Box2
 {
 public:
     Array2();
+    Array2(int nx, int ny);
+    Array2(int nx, int ny, vec2 a, vec2 b);
 protected:
     int nx,ny; //Discretisation
 };

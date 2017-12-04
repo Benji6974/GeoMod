@@ -7,12 +7,12 @@
  #include <QTextStream>
  #include <QFile>
 
-HightField::HightField()
+HeightField::HeightField()
 {
 
 }
 
-void HightField::load(std::string img,vec2 a, vec2 b,float za, float zb){
+void HeightField::load(std::string img,vec2 a, vec2 b,float za, float zb){
    /* Image image= read_image(img.c_str());
        if(image == Image::error())
            std::cout<<"erreur de chargement"<<std::endl;
@@ -69,11 +69,11 @@ void HightField::load(std::string img,vec2 a, vec2 b,float za, float zb){
 
 }
 
-HightField::HightField(int nx, int ny, vec2 a, vec2 b) : Array2(nx,ny,a,b){}
+HeightField::HeightField(int nx, int ny, vec2 a, vec2 b) : Array2(nx,ny,a,b){}
 
-void HightField::save(){
+void HeightField::save(){
 
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save off"), "", tr("Off files (*.off)"));
+   /* QString fileName = QFileDialog::getSaveFileName(this, QString("Save off"), "", QString("Off files (*.off)"));
       if (!fileName.isNull()){
           QFile file(fileName);
           if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -85,7 +85,7 @@ void HightField::save(){
           for (int x=0; x<nx; x++ ){
               for (int y=0; y<ny; y++ ){
                   nbPoints++;
-                  f<<"v"<<nbPoints< " "<< x<<" "<<y<<" "<<z[index(x,y)]<<endl;
+                 // f<<"v"<<nbPoints< " "<<x<<" "<<y<<" "<<z[index(x,y)]<<endl;
               }
           }
           nbPoints = 0;
@@ -94,10 +94,10 @@ void HightField::save(){
               for (int y=0; y<ny-1; y++ ){
                   nbPoints++;
                   nbFaces++;
-                  f<<"f"<<nbFaces<<" v"<<nbPoints<<" v"<<nbPoints+nx<<" v"<<nbPoints+1<<endl;
+                 // f<<"f"<<nbFaces<<" v"<<nbPoints<<" v"<<nbPoints+nx<<" v"<<nbPoints+1<<endl;
               }
           }
 
-      }
+      }*/
 
 }
