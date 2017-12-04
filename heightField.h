@@ -3,9 +3,10 @@
 #include "array2.h"
 #include "image_io.h"
 #include <string>
+#include "scalarField.h"
 
 
-class HeightField : public Array2
+class HeightField : public ScalarField
 {
 public:
     HeightField();
