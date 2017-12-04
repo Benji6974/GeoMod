@@ -56,8 +56,10 @@ void ScalarField::load(QString imgUrl, vec2 a, vec2  b, float za, float zb){
     this->a = a;
     this->b = b;
 
-    QPixmap imgPix(imgUrl);
-    QImage  img = imgPix.toImage();
+    QImage img(imgUrl);
+
+    if(img.isNull())
+        return;
 
     img.scaled(nx,ny);
 

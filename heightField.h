@@ -4,6 +4,12 @@
 #include "image_io.h"
 #include <string>
 #include "scalarField.h"
+#include <QCoreApplication>
+#include <QGraphicsTextItem>
+#include <QFont>
+#include <QFileDialog>
+#include <QTextStream>
+#include <QFile>
 
 
 class HeightField : public ScalarField
@@ -11,7 +17,6 @@ class HeightField : public ScalarField
 public:
     HeightField();
     HeightField(int nx, int ny, vec2 a, vec2 b);
-    void load(std::string img,vec2 a, vec2 b,float za, float zb);
     void save();
 
     // ajouter ici les fonctions de hauteur
