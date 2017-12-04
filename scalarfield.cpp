@@ -18,12 +18,12 @@ vec3 ScalarField::P(int i,int j){
 
 double ScalarField::heightGrid(int i,int j){
     // chepa ce que ca fait
-    return 0.0;
+    return P(i,j).z;
 }
 
 bool ScalarField::inside(int x,int y,int z){
     vec3 zt = P(x,y);
-    return z<zt; // test un peu pourri int vs vec3 ??
+    return z<zt.z; // test un peu pourri int vs vec3 ??
 }
 
 double ScalarField::height(const double& x, const double& y){
@@ -40,8 +40,8 @@ double ScalarField::height(const double& x, const double& y){
     v=v-nv*(b.y-a.y)/ny;
 
     if(u+v<1){
-        return (1-u-v)*heightGrid(i,j)+u*heightGrid(i+1,j)+v*heightGrid(i,j+1); // completement pourri son code y'a pas de i ni de j !!!
+        return (1-u-v)*heightGrid(nu,nv)+u*heightGrid(nu+1,nv)+v*heightGrid(nu,nv+1); // completement pourri son code y'a pas de i ni de j !!!
     }else{
-        return (u+v-1)*heightGrid(i+1,j+1)+(1-v)*heightGrid(i+1,j)+(1-u)*heightGrid(i,j+1);
+        return (u+v-1)*heightGrid(nu+1,nv+1)+(1-v)*heightGrid(nu+1,nv)+(1-u)*heightGrid(nu,nv+1);
     }
 }

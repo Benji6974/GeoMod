@@ -7,7 +7,7 @@
 #ifdef GK_MACOS
 #include <SDL2_image/SDL_image.h>
 #else
-#include <SDL2/SDL_image.h>
+#include <SDL.h>
 #endif
 
 #include "image_io.h"

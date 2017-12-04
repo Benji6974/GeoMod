@@ -5,8 +5,8 @@ HightField::HightField()
 
 }
 
-HightField::load(string img,vec2 a, vec2 b,float za, float zb){
-    Image image= read_image(img);
+void HightField::load(std::string img,vec2 a, vec2 b,float za, float zb){
+    Image image= read_image(img.c_str());
        if(image == Image::error())
            std::cout<<"erreur de chargement"<<std::endl;
 
@@ -17,10 +17,10 @@ HightField::load(string img,vec2 a, vec2 b,float za, float zb){
 
        for (y=0;y<image.width()-1;y++)
        {
-           std::vector<Data> val;
+           std::vector<ScalarField> val;
            for (x=0;x<image.height()-1;x++)
            {
-               Data t;
+               ScalarField t;
                Color col = image(x, y);
                Color col2 = image(x+1, y);
                Color col3 = image(x, y+1);
@@ -53,9 +53,9 @@ HightField::load(string img,vec2 a, vec2 b,float za, float zb){
                t.setNormal(normalize(Vector(((y2-y1)*(z3-z1)-(z2-z1)*(y3-y1),(z2-z1)*(x3-x1) - (x2-x1)*(z3-z1),(x2-x1)*(y3-y1) - (y2-y1)*(x3-x1))*Vector((y3-y4)*(z2-z4)-(z3-z4)*(y2-y4),(z3-z1)*(x2-x4) - (x3-x4)*(z2-z4),(x3-x4)*(y2-y4) - (y3-y4)*(x2-x4))/2)));
 
                //MARCHEBOF t.setNormal(Vector((y2-y1)*(z3-z1)-(z2-z1)*(y3-y1),(z2-z1)*(x3-x1) - (x2-x1)*(z3-z1),(x2-x1)*(y3-y1) - (y2-y1)*(x3-x1)+1));*/
-               val.push_back(t);
+               //val.push_back(t);
            }
-           tab.push_back(val);
+           //tab.push_back(val);
 
        }
 }

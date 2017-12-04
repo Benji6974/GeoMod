@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     noisef.cpp \
     vec.cpp \
     image.cpp \
-    image_io.cpp
+    image_io.cpp \
+    color.cpp
 
 HEADERS += \
     scalarfield.h \
@@ -30,4 +31,5 @@ HEADERS += \
     noisef.h \
     vec.h \
     image.h \
-    image_io.h
+    image_io.h \
+    color.h
