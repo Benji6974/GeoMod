@@ -1,4 +1,4 @@
-QT -= gui
+QT += gui
 
 CONFIG += c++11 console
 CONFIG -= app_bundle
@@ -14,16 +14,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-LIBS += -L extern\x86_64-w64-mingw32\lib  -lmingw32 -mwindows -mconsole -lSDL2main -lSDL2
-INCLUDEPATH += extern\x86_64-w64-mingw32\include
+#LIBS += -L extern\x86_64-w64-mingw32\lib  -lmingw32 -mwindows -mconsole -lSDL2main -lSDL2
+#INCLUDEPATH += extern\x86_64-w64-mingw32\include
 
 
 SOURCES += main.cpp \
     noisef.cpp \
     vec.cpp \
-    image.cpp \
-    image_io.cpp \
-    color.cpp \
+ #   image.cpp \
+ #   image_io.cpp \
+ #   color.cpp \
     heightField.cpp \
     layerField.cpp \
     scalarField.cpp \
@@ -33,9 +33,9 @@ SOURCES += main.cpp \
 HEADERS += \
     noisef.h \
     vec.h \
-    image.h \
-    image_io.h \
-    color.h \
+  #  image.h \
+  #  image_io.h \
+  #  color.h \
     heightField.h \
     layerField.h \
     scalarField.h \
