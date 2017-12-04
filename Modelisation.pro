@@ -14,8 +14,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-LIBS += -L extern\\mingw\\lib -lSDL
-INCLUDEPATH += extern\\mingw\\include
+LIBS += -L extern\x86_64-w64-mingw32\lib  -lmingw32 -mwindows -mconsole -lSDL2main -lSDL2
+INCLUDEPATH += extern\x86_64-w64-mingw32\include
 
 
 SOURCES += main.cpp \
@@ -26,7 +26,9 @@ SOURCES += main.cpp \
     color.cpp \
     heightField.cpp \
     layerField.cpp \
-    scalarField.cpp
+    scalarField.cpp \
+    box2.cpp \
+    array2.cpp
 
 HEADERS += \
     noisef.h \
@@ -36,4 +38,6 @@ HEADERS += \
     color.h \
     heightField.h \
     layerField.h \
-    scalarField.h
+    scalarField.h \
+    box2.h \
+    array2.h

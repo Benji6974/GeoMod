@@ -1,9 +1,9 @@
 #ifndef SCALARFIELD_H
 #define SCALARFIELD_H
-#include "vec.h"
+#include "array2.h"
 #include <string>
 
-class ScalarField
+class ScalarField: public Array2
 {
 public:
     ScalarField();
@@ -14,8 +14,6 @@ public:
     double heightGrid(int i,int j);
 
 protected:
-    Vector a,b; //Bounding box
-    int nx,ny; //Discretisation
     double z[]; //Array of height
 };
 #endif // SCALARFIELD_H

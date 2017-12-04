@@ -6,7 +6,7 @@ HightField::HightField()
 }
 
 void HightField::load(std::string img,vec2 a, vec2 b,float za, float zb){
-    Image image= read_image(img.c_str());
+   /* Image image= read_image(img.c_str());
        if(image == Image::error())
            std::cout<<"erreur de chargement"<<std::endl;
 
@@ -52,10 +52,10 @@ void HightField::load(std::string img,vec2 a, vec2 b,float za, float zb){
                t.setHauteur((float)(((col.r+col.g+col.b)/3*255-130))/scaling);
                t.setNormal(normalize(Vector(((y2-y1)*(z3-z1)-(z2-z1)*(y3-y1),(z2-z1)*(x3-x1) - (x2-x1)*(z3-z1),(x2-x1)*(y3-y1) - (y2-y1)*(x3-x1))*Vector((y3-y4)*(z2-z4)-(z3-z4)*(y2-y4),(z3-z1)*(x2-x4) - (x3-x4)*(z2-z4),(x3-x4)*(y2-y4) - (y3-y4)*(x2-x4))/2)));
 
-               //MARCHEBOF t.setNormal(Vector((y2-y1)*(z3-z1)-(z2-z1)*(y3-y1),(z2-z1)*(x3-x1) - (x2-x1)*(z3-z1),(x2-x1)*(y3-y1) - (y2-y1)*(x3-x1)+1));*/
+               //MARCHEBOF t.setNormal(Vector((y2-y1)*(z3-z1)-(z2-z1)*(y3-y1),(z2-z1)*(x3-x1) - (x2-x1)*(z3-z1),(x2-x1)*(y3-y1) - (y2-y1)*(x3-x1)+1));
                //val.push_back(t);
            }
            //tab.push_back(val);
 
-       }
+       }*/
 }

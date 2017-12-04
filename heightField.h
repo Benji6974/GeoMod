@@ -1,11 +1,11 @@
 #ifndef HIGHTFIELD_H
 #define HIGHTFIELD_H
-#include "scalarField.h"
+#include "array2.h"
 #include "image_io.h"
 #include <string>
 
 
-class HightField : public ScalarField
+class HightField : public Array2
 {
 public:
     HightField();
