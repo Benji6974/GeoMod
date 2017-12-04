@@ -14,22 +14,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+INCLUDEPATH += /usr/local/include/
+
+LIBS += -L/usr/local/lib/ -lSDL
+
 SOURCES += main.cpp \
-    scalarfield.cpp \
-    hightfield.cpp \
-    layerfield.cpp \
     noisef.cpp \
     vec.cpp \
     image.cpp \
     image_io.cpp \
-    color.cpp
+    color.cpp \
+    heightField.cpp \
+    layerField.cpp \
+    scalarField.cpp
 
 HEADERS += \
-    scalarfield.h \
-    hightfield.h \
-    layerfield.h \
     noisef.h \
     vec.h \
     image.h \
     image_io.h \
-    color.h
+    color.h \
+    heightField.h \
+    layerField.h \
+    scalarField.h

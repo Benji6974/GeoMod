@@ -1,6 +1,6 @@
 #ifndef LAYERFIELD_H
 #define LAYERFIELD_H
-#include "hightfield.h"
+#include "heightField.h"
 
 class LayerField
 {

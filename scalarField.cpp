@@ -1,4 +1,4 @@
-#include "scalarfield.h"
+#include "scalarField.h"
 
 ScalarField::ScalarField()
 {

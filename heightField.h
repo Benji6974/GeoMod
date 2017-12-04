@@ -1,6 +1,6 @@
 #ifndef HIGHTFIELD_H
 #define HIGHTFIELD_H
-#include "scalarfield.h"
+#include "scalarField.h"
 #include "image_io.h"
 #include <string>
 

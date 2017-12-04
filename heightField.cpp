@@ -1,4 +1,4 @@
-#include "hightfield.h"
+#include "heightField.h"
 
 HightField::HightField()
 {
