@@ -3,6 +3,12 @@
 #include "array2.h"
 #include <QString>
 #include <QPixmap>
+#include <QCoreApplication>
+#include <QGraphicsTextItem>
+#include <QFont>
+#include <QFileDialog>
+#include <QTextStream>
+#include <QFile>
 
 class ScalarField: public Array2
 {
@@ -15,7 +21,7 @@ public:
     double height(const double& x, const double& y);
     double heightGrid(int i,int j);
 
-    void load(QString imgUrl, vec2 a, vec2  b, float za, float zb);
+    void load(QString relativePathFileName, vec2 a, vec2  b, float za, float zb);
 
 protected:
     QVector<double> z; //Array of height

@@ -14,39 +14,42 @@ HeightField::HeightField()
 
 HeightField::HeightField(int nx, int ny, vec2 a, vec2 b) : ScalarField(nx,ny,a,b){}
 
-void HeightField::save(){
+void HeightField::save(QString fileName){
 
-    QString fileName("C:/Users/Benji/workspace/M2/GeoMod/save.obj");
-        if (!fileName.isNull()){
-            QFile file(fileName);
-            if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-                return;
-            QTextStream monFlux(&file);
+    QString pathFile = QDir::currentPath() + fileName;
+    if (!pathFile.isNull()){
+        QFile file(pathFile);
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+            return;
+        QTextStream monFlux(&file);
+
+    /*string const nomFichier("/home/etu/p1409693/workspace/GeoMod/save.obj");
+    ofstream monFlux(nomFichier.c_str());*/
 
 
-            monFlux << "#Sauvegarde .obj"<<endl;
-            monFlux << "o objet"<<endl;
-            int nbPoints = 0;
-            for (int x=0; x<nx; x++ ){
-                for (int y=0; y<ny; y++ ){
-                    nbPoints++;
-                   monFlux<<"v"<< " " << x <<" "<<y<<" "<<z[index(x,y)]<<endl;
-                }
-            }
-            nbPoints = 0;
-            int nbFaces = 0;
-            monFlux <<endl;
-            monFlux << "g faces"<<endl;
-            for (int x=0; x<nx-1; x++ ){
-                for (int y=0; y<ny-1; y++ ){
-                    nbPoints++;
-                    nbFaces++;
-                   monFlux<<"f"<<" v"<<nbPoints<<" v"<<nbPoints+nx<<" v"<<nbPoints+1<<endl;
-                }
+        monFlux << "#Sauvegarde .obj"<<endl;
+        monFlux << "o objet"<<endl;
+        int nbPoints = 0;
+        for (int x=0; x<nx; x++ ){
+            for (int y=0; y<ny; y++ ){
+                nbPoints++;
+               monFlux<<"v"<< " " << x <<" "<<y<<" "<<z[index(x,y)]<<endl;
             }
         }
+        nbPoints = 0;
+        int nbFaces = 0;
+        monFlux <<endl;
+        monFlux << "g faces"<<endl;
+        for (int x=0; x<nx-1; x++ ){
+            for (int y=0; y<ny-1; y++ ){
+                nbPoints++;
+                nbFaces++;
+               monFlux<<"f"<<" v"<<nbPoints<<" v"<<nbPoints+nx<<" v"<<nbPoints+1<<endl;
+            }
+        }
+    }
 
-
+    cout << "heightField sauvegarder dans " + fileName.toStdString() << endl;
 }
 
 void HeightField::affiche(){
