@@ -23,9 +23,6 @@ void HeightField::save(){
                 return;
             QTextStream monFlux(&file);
 
-        /*string const nomFichier("/home/etu/p1409693/workspace/GeoMod/save.obj");
-        ofstream monFlux(nomFichier.c_str());*/
-
 
             monFlux << "#Sauvegarde .obj"<<endl;
             monFlux << "o objet"<<endl;
