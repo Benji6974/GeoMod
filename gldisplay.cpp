@@ -64,7 +64,7 @@ void GLDisplay::mousePressEvent(QMouseEvent *event)
              posX = 2*(posX*1.5)/width();
              posY = 2*(posY*1.5)/height();
              int sommet = maillage->creerSommet(Point(posX,posY,0), false,false);
-             // geqtion des 2 diférents cas soit en incrémental soit en normal
+             // gestion des 2 diférents cas soit en incrémental soit en normal
              if (!incremental)
                 maillage->ajoutSommet2(sommet);
              else

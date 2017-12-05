@@ -19,22 +19,23 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->graphicsView->setScene(scene);
     ui->graphicsView->scale(100,100);
 
-    connect(ui->loadOff, SIGNAL (released()), this, SLOT (ouvrirFichier()));
-    connect(ui->saveOff, SIGNAL (released()), this, SLOT (saveFichier()));
+    connect(ui->pushButtonLoadImage, SIGNAL (released()), this, SLOT (loadImage()));
+    connect(ui->pushButtonSaveHFtoObj, SIGNAL (released()), this, SLOT (saveHFtoObj()));
 
 }
 
 /**
- * @brief MainWindow::ouvrirFichier on load le fichier selectionnée
+ * @brief MainWindow::LoadImage on affiche une image en niveau de gris representant un scalarField
  */
-void MainWindow::ouvrirFichier(){
+void MainWindow::loadImage(){
+
 
 }
 
 /**
- * @brief MainWindow::saveFichier on sauvegarde le fichier selectionnée à la facon OFF (Sommet + faces mais pas les arretes
+ * @brief MainWindow::saveHFtoObj on sauvegarde une heightmap en obj
  */
-void MainWindow::saveFichier(){
+void MainWindow::saveHFtoObj(){
 
 }
 

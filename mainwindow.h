@@ -21,8 +21,8 @@ private:
     QGraphicsScene *scene;
 
 private slots:
-    void ouvrirFichier();
-    void saveFichier();
+    void loadImage();
+    void saveHFtoObj();
 };
 
 #endif // MAINWINDOW_H

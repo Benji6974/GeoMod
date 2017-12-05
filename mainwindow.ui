@@ -14,116 +14,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="buttonInfiniPoint">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>60</y>
-      <width>161</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Afficher Point infini</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="buttonDrawMaillage">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>10</y>
-      <width>161</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Dessiner le maillage</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="buttonDelaunay">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>110</y>
-      <width>161</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="baseSize">
-     <size>
-      <width>0</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Delaunay</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="activePoints">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>160</y>
-      <width>161</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Activer Ajout Points</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="saveOff">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>210</y>
-      <width>161</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Enregistrer off</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="loadOff">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>260</y>
-      <width>161</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Load Off</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="incrementalActive">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>310</y>
-      <width>161</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Incremental OFF</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="afficheCrust">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>360</y>
-      <width>161</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Activer Crust</string>
-    </property>
-   </widget>
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
@@ -138,7 +28,7 @@
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
-      <string>2D + Texte</string>
+      <string>Image</string>
      </attribute>
      <widget class="QGraphicsView" name="graphicsView">
       <property name="geometry">
@@ -153,7 +43,7 @@
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
-      <string>3D</string>
+      <string>Mesh</string>
      </attribute>
      <widget class="GLDisplay" name="openGLWidget" native="true">
       <property name="geometry">
@@ -167,52 +57,89 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QPushButton" name="scalePlus">
+   <widget class="QPushButton" name="pushButtonShowHF">
     <property name="geometry">
      <rect>
-      <x>780</x>
-      <y>660</y>
-      <width>51</width>
-      <height>41</height>
+      <x>700</x>
+      <y>270</y>
+      <width>151</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>+</string>
+     <string>Show HF</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="scaleMoins">
+   <widget class="QPushButton" name="pushButtonShowObj">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>660</y>
-      <width>51</width>
-      <height>41</height>
+      <x>700</x>
+      <y>60</y>
+      <width>151</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>-</string>
+     <string>Show obj</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEditSaveHFtoObj">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>110</y>
+      <width>151</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEditLoadImage">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>190</y>
+      <width>151</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonSaveHFtoObj">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>140</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save HF to obj</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonLoadImage">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>220</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load Image</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEditShowObj">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>30</y>
+      <width>151</width>
+      <height>20</height>
+     </rect>
     </property>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>862</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionSubmenu">
    <property name="text">
     <string>submenu</string>
