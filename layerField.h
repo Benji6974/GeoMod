@@ -2,7 +2,7 @@
 #define LAYERFIELD_H
 #include "heightField.h"
 
-class LayerField
+class LayerField : public ScalarField
 {
 public:
     LayerField();

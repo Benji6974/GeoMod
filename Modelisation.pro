@@ -1,4 +1,5 @@
-QT += core gui
+QT += core gui opengl
+LIBS += -LC:\QtCreator\5.9.1\mingw53_32\lib\libQt5OpenGL.a -lopengl32
 
 CONFIG += c++11 console
 CONFIG -= app_bundle
