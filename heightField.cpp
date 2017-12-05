@@ -41,8 +41,9 @@ void HeightField::save(QString fileName){
         for (int x=0; x<nx-1; x++ ){
             for (int y=0; y<ny-1; y++){
                nbPoints++;
-               monFlux<<"f"<<" "<<(y+x*ny)+1<<" "<<(y+x*ny)+1+ny+1<<" "<<(y+x*ny)+1+ny<<endl;
-               monFlux<<"f"<<" "<<(y+x*ny)+1<<" "<<(y+x*ny)+1+1<<" "<<(y+x*ny)+1+ny+1<<endl;
+               int num = (y+x*ny)+1;
+               monFlux<<"f"<<" "<<num<<" "<<num+ny+1<<" "<<num+ny<<endl;
+               monFlux<<"f"<<" "<<num<<" "<<num+1<<" "<<num+ny+1<<endl;
             }
         }
     }
