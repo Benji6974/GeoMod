@@ -33,7 +33,9 @@ SOURCES += main.cpp \
     layerField.cpp \
     scalarField.cpp \
     box2.cpp \
-    array2.cpp
+    array2.cpp \
+    gldisplay.cpp \
+    mainwindow.cpp
 
 HEADERS += \
     noisef.h \
@@ -45,4 +47,9 @@ HEADERS += \
     layerField.h \
     scalarField.h \
     box2.h \
-    array2.h
+    array2.h \
+    gldisplay.h \
+    mainwindow.h
+
+FORMS += \
+    mainwindow.ui
