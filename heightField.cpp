@@ -29,22 +29,20 @@ void HeightField::save(QString fileName){
 
         monFlux << "#Sauvegarde .obj"<<endl;
         monFlux << "o objet"<<endl;
-        int nbPoints = 0;
+
         for (int x=0; x<nx; x++ ){
             for (int y=0; y<ny; y++ ){
-                nbPoints++;
                monFlux<<"v"<< " " << x <<" "<<y<<" "<<z[index(x,y)]<<endl;
             }
         }
-        nbPoints = 0;
-        int nbFaces = 0;
+        int nbPoints = 0;
         monFlux <<endl;
         monFlux << "g faces"<<endl;
         for (int x=0; x<nx-1; x++ ){
-            for (int y=0; y<ny-1; y++ ){
-                nbPoints++;
-                nbFaces++;
-               monFlux<<"f"<<" "<<nbPoints<<" "<<nbPoints+nx<<" "<<nbPoints+1<<endl;
+            for (int y=0; y<ny-1; y++){
+               nbPoints++;
+               monFlux<<"f"<<" "<<(y+x*ny)+1<<" "<<(y+x*ny)+1+ny+1<<" "<<(y+x*ny)+1+ny<<endl;
+               monFlux<<"f"<<" "<<(y+x*ny)+1<<" "<<(y+x*ny)+1+1<<" "<<(y+x*ny)+1+ny+1<<endl;
             }
         }
     }
