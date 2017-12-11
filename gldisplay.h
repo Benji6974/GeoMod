@@ -2,7 +2,7 @@
 #define GLDISPLAY_H
 
 #include <QGLWidget>
-//#include <gasket.h>
+#include "layerField.h"
 #include <QMouseEvent>
 
 
@@ -18,7 +18,7 @@ public:
     void update();
 
     virtual void resizeGL(int w, int h);
-    //Maillage *maillage;
+    LayerField *lf;
 protected:
     virtual void mouseMoveEvent ( QMouseEvent * event );
     virtual void mousePressEvent ( QMouseEvent * event );

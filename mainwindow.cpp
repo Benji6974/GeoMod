@@ -17,11 +17,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
-    ui->graphicsView->scale(100,100);
+    ui->graphicsView->scale(10,10);
 
+    ui->openGLWidget->lf = &lf;
     connect(ui->pushButtonLoadImage, SIGNAL (released()), this, SLOT (loadImage()));
     connect(ui->pushButtonSaveHFtoObj, SIGNAL (released()), this, SLOT (saveHFtoObj()));
 
+    lf = LayerField();
 }
 
 /**

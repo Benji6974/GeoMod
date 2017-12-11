@@ -57,14 +57,17 @@ void HeightField::affiche(){
    color[0] = 0;
    color[1] = 1;
    color[2] = 0;
-   for (int x=0; x<nx; x++ ){
-       for (int y=0; y<ny; y++ ){
+   for (int x=0; x<nx-1; x++ ){
+       for (int y=0; y<ny-1; y++ ){
           drawline(vec3(x,y,z[index(x,y)]),vec3(x+1,y,z[index(x+1,y)]),color);
-          drawline(vec3(x+1,y,z[index(x+1,y)]),vec3(x,y+1,z[index(x,y+1)]),color);
-          drawline(vec3(x,y+1,z[index(x,y+1)]),vec3(x,y,z[index(x,y)]),color);
+          drawline(vec3(x+1,y,z[index(x+1,y)]),vec3(x+1,y+1,z[index(x+1,y+1)]),color);
+          drawline(vec3(x+1,y+1,z[index(x+1,y+1)]),vec3(x,y,z[index(x,y)]),color);
+
+          drawline(vec3(x,y,z[index(x,y)]),vec3(x,y+1,z[index(x,y+1)]),color);
+          drawline(vec3(x,y+1,z[index(x,y+1)]),vec3(x+1,y+1,z[index(x+1,y+1)]),color);
+          drawline(vec3(x+1,y+1,z[index(x+1,y+1)]),vec3(x,y,z[index(x,y)]),color);
        }
    }
-
 
 }
 

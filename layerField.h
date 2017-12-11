@@ -6,7 +6,7 @@ class LayerField : public ScalarField
 {
 public:
     LayerField();
-
+    void affiche();
 private:
     HeightField br; // couche bedrock
     HeightField sable; //couche de sable

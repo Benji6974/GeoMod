@@ -51,6 +51,8 @@ double ScalarField::height(const double& x, const double& y){
     }
 }
 
+
+
 void ScalarField::load(QString relativePathFileName, vec2 a, vec2  b, float za, float zb){
 
     this->a = a;

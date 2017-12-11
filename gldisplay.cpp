@@ -21,8 +21,7 @@ void GLDisplay::paintGL()
 
     glRotatef(_angle, 0.0f, 1.0f, 0.0f);
 
-//    gasket.draw();
-    //maillage->draw();
+    lf->affiche();
 }
 
 void GLDisplay::resizeGL(int w, int h)
@@ -56,9 +55,9 @@ void GLDisplay::mouseMoveEvent(QMouseEvent *event)
  */
 void GLDisplay::mousePressEvent(QMouseEvent *event)
 {
-    /*if( event != NULL ){
+    if( event != NULL ){
          _position = event->pos();
-         if(ajoutPoints){
+        /* if(ajoutPoints){
              float posX = (float)_position.rx()-width()/2;
              float posY = -((float)_position.ry()-height()/2);
              posX = 2*(posX*1.5)/width();
@@ -70,9 +69,9 @@ void GLDisplay::mousePressEvent(QMouseEvent *event)
              else
                  maillage->delonayIncremental(sommet);
              updateGL();
-         }
+         }*/
 
-    }*/
+    }
 
 }
 

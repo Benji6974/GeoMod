@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QPushButton>
+#include "layerField.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +20,7 @@ public:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
+    LayerField lf;
 
 private slots:
     void loadImage();
