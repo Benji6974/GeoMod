@@ -98,6 +98,10 @@ struct vec2
     float x, y;
 };
 
+vec2 operator+ ( const vec2& u, const vec2& v );
+vec2 operator- ( const vec2& u, const vec2& v );
+vec2 operator/ ( const vec2& u, const vec2& v );
+
 
 //! vecteur generique, utilitaire.
 struct vec3
