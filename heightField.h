@@ -15,6 +15,7 @@ public:
     void save(QString fileName);
     void affiche();
     void drawline(vec3 s1, vec3 s2, float color[3]);
+    vec3 normal(vec3 s1);
     // ajouter ici les fonctions de hauteur
 };
 

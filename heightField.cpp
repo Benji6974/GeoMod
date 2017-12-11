@@ -75,9 +75,9 @@ void HeightField::drawline(vec3 s1, vec3 s2, float color[3]) {
     glLineWidth(0.5);
     glColor3f(color[0],color[1],color[2]);
     glBegin(GL_LINES);
-
-    glVertex3f(s1.x, s1.y, s1.z);
-    glVertex3f(s2.x, s2.y, s2.z);
+    float scale = 0.1;
+    glVertex3f(s1.x*scale, s1.y*scale, s1.z*scale);
+    glVertex3f(s2.x*scale, s2.y*scale, s2.z*scale);
 
     glEnd();
 }
