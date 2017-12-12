@@ -20,10 +20,15 @@ public:
     bool inside(int x,int y,int z);
     double height(const vec2& p);
     double heightGrid(int i,int j);
+    vec2 getCellSize();
+    double InterpolationBilineaire(const vec2& uv,double v00,double v01, double v10, double v11);
 
     void load(QString relativePathFileName, vec2 a, vec2  b, float za, float zb);
+    QImage getImage();
+
+    QVector<double> z; //Array of height
 
 protected:
-    QVector<double> z; //Array of height
+
 };
 #endif // SCALARFIELD_H

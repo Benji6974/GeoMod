@@ -94,7 +94,6 @@ struct vec2
 {
     //! constructeur par defaut.
     vec2( const float _x= 0, const float _y= 0 ) : x(_x), y(_y) {}
-
     float x, y;
 };
 
