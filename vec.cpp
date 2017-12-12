@@ -90,6 +90,21 @@ Vector cross( const Vector& u, const Vector& v )
         (u.x * v.y) - (u.y * v.x));
 }
 
+vec2 operator+ ( const vec2& u, const vec2& v )
+{
+    return vec2(u.x + v.x,u.y + v.y);
+}
+
+vec2 operator- ( const vec2& u, const vec2& v )
+{
+    return vec2(u.x - v.x,u.y - v.y);
+}
+
+vec2 operator/ ( const vec2& u, const vec2& v )
+{
+    return vec2(u.x / v.x, u.y / v.y);
+}
+
 float dot( const Vector& u, const Vector& v )
 {
     return u.x * v.x + u.y * v.y + u.z * v.z;

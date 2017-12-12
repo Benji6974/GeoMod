@@ -18,7 +18,7 @@ public:
     int index(int i,int j);
     vec3 P(int i,int j);
     bool inside(int x,int y,int z);
-    double height(const double& x, const double& y);
+    double height(const vec2& p);
     double heightGrid(int i,int j);
 
     void load(QString relativePathFileName, vec2 a, vec2  b, float za, float zb);
