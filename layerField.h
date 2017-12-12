@@ -8,6 +8,7 @@ public:
     LayerField();
     LayerField(int nx, int ny, vec2 a, vec2 b);
     void affiche(std::string str);
+    void affiche();
     HeightField br; // couche bedrock
     HeightField sable; //couche de sable
     HeightField montagne; //couche montagne

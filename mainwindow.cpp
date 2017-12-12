@@ -58,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent) :
      ui->box_bx->setValue(b.x);
      ui->box_by->setValue(b.y);
 
-
+    ui->openGLWidget->aff = "br";
 }
 
 void MainWindow::affiche(){
@@ -100,6 +100,7 @@ void MainWindow::loadImage(){
     if (ui->ck_sable->isChecked() || ui->ck_total->isChecked())
         lf.sable.load(fileName,vec2(ui->box_dimentionMin->value(),ui->box_dimentionMin->value()),vec2(ui->box_dimentionMax->value(),ui->box_dimentionMax->value()),ui->box_hauteurmin->value(),ui->box_hauteurmax->value());
 
+
 }
 
 /**
@@ -117,7 +118,7 @@ void MainWindow::saveHFtoObj(){
     if (ui->ck_sable->isChecked())
         lf.sable.save(fileName);
     if (ui->ck_total->isChecked())
-        //lf.save(fileName); // a decomenter quand save est remontée dans scalarfield
+        lf.save(fileName);
         return;
 
 }

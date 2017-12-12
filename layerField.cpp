@@ -25,16 +25,20 @@ void LayerField::affiche(std::string str){
         eau.affiche();
     else if(str == "montagne")
         montagne.affiche();
-    else if(str == "total")
-        //affiche(); marche pas tant qu'on a pas rebasculé la fonction affiche dans scalarfield
-        return;
-    else
+    else if(str == "total"){
+        heightTotal();
+        this->affiche();
+    }else
         return;
 
+}
+void LayerField::affiche(){
+    ScalarField::affiche();
 }
 
 void LayerField::heightTotal(){
     for (unsigned int a=0; a<vec_HF.size(); a++){
+
         for (int x=0; x<nx-1; x++ ){
             for (int y=0; y<ny-1; y++){
                 z[index(x,y)] += vec_HF[a].height(vec2(x,y));
