@@ -1,5 +1,7 @@
 #include "scalarField.h"
 
+#include <iostream>
+
 ScalarField::ScalarField()
 {
     z = QVector<double>();
@@ -31,10 +33,38 @@ bool ScalarField::inside(int x,int y,int z){
     return z<zt.z; // test un peu pourri int vs vec3 ??
 }
 
+vec2 ScalarField::getCellSize()
+{
+    return vec2((b.x-a.x)/(nx-1),(b.y-a.y)/(ny-1));
+}
+
+double ScalarField::InterpolationBilineaire(const vec2& uv,double v00,double v01, double v10, double v11)
+{
+    return (1-uv.x)*(1-uv.y)*v00 +
+            (1-uv.x)*uv.y*v01 +
+            uv.x*(1-uv.y)*v10 +
+            uv.x*uv.y*v11;
+}
+
 double ScalarField::height(const vec2& p){
     //interpolation bilineaire
     vec2 uv = (p-a)/(b-a);
 
+    //location de la celulle sur la grille
+    int nu=int(uv.x*(nx-1));
+    int nv=int(uv.y*(ny-1));
+
+    //coordonées locale sur la cellule
+    vec3 pij = P(nu,nv);
+
+    vec2 sizeC = getCellSize();
+    uv = (p-vec2(pij.x,pij.y))/sizeC;
+
+
+    return InterpolationBilineaire(uv,pij.z,heightGrid(nu,nv+1),
+                                   heightGrid(nu+1,nv),
+                                   heightGrid(nu+1,nv+1));
+    /*
     int nu=int(uv.x*nx);
     int nv=int(uv.y*ny);
 
@@ -53,7 +83,7 @@ double ScalarField::height(const vec2& p){
     double sigmaFxy = q11.z + q22.z - q21.z - q12.z;
 
     return sigmaFx*(dx/sigmaX)+sigmaFy*(dy/sigmaY)+sigmaFxy*(dx/sigmaX)*(dy/sigmaY)+q11.z;
-
+    */
     //interpolation triangulaire (non fonctionelle)
     /*
     //coordonées locales
@@ -103,4 +133,26 @@ void ScalarField::load(QString pathFile, vec2 a, vec2  b, float za, float zb){
 
     std::cout<<"Image lue"<<std::endl;
 
+}
+
+QImage ScalarField::getImage()
+{
+    QImage img;
+
+    if(nx + ny < 1)
+        return img;
+
+    for(int i = 0 ; i < this->nx ; i++)
+    {
+        for(int j = 0 ; j < this->ny ; j++)
+        {
+            /*
+            img.set
+            int value =  qGray(img.pixel(i,j));
+            double h = ((double)value/255.f)*(zb-za) + za;
+            z[index(i,j)] = h;
+            */
+        }
+    }
+    return img;
 }
