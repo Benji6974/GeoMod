@@ -9,6 +9,7 @@
 #include <QFileDialog>
 #include <QTextStream>
 #include <QFile>
+#include <string>
 
 class ScalarField: public Array2
 {

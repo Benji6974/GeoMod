@@ -11,3 +11,11 @@ Array2::Array2(int nx, int ny, vec2 a, vec2 b): Box2(a,b){
     this->nx = nx;
     this->ny = ny;
 }
+
+vec2 Array2::getNxNy(){
+    return vec2(this->nx,this->ny);
+}
+void Array2::setNxNy(vec2 n){
+    this->nx = n.x;
+    this->ny = n.y;
+}

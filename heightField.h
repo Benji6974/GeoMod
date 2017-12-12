@@ -2,7 +2,7 @@
 #define HIGHTFIELD_H
 #include "array2.h"
 #include "image_io.h"
-#include <string>
+
 #include "scalarField.h"
 #include <GL/gl.h>
 

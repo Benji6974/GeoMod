@@ -19,6 +19,7 @@ public:
 
     virtual void resizeGL(int w, int h);
     LayerField *lf;
+    std::string aff;
 protected:
     virtual void mouseMoveEvent ( QMouseEvent * event );
     virtual void mousePressEvent ( QMouseEvent * event );
@@ -28,8 +29,12 @@ private:
 //    Gasket gasket;
 
 
-    float _angle;
+    float _angleX;
+    float _angleY;
+    float _deplacementY;
+    float _deplacementX;
     QPoint _position;
+
     
 signals:
     

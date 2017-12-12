@@ -5,6 +5,13 @@
 #include <QGraphicsScene>
 #include <QPushButton>
 #include "layerField.h"
+#include <QCoreApplication>
+#include <QGraphicsTextItem>
+#include <QFont>
+ #include <QFileDialog>
+ #include <QTextStream>
+ #include <QFile>
+#include <QCheckBox>
 
 namespace Ui {
 class MainWindow;
@@ -25,6 +32,9 @@ private:
 private slots:
     void loadImage();
     void saveHFtoObj();
+    void changeNxNy();
+    void affiche();
+    void changeAB();
 };
 
 #endif // MAINWINDOW_H

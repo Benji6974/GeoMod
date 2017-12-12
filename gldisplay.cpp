@@ -2,7 +2,11 @@
 
 GLDisplay::GLDisplay(QWidget *parent) :
     QGLWidget(parent),
-    _angle(0.0f)
+    _angleX(0.0f),
+    _angleY(0.0f),
+    _deplacementX(0.0f),
+    _deplacementY(0.0f),
+    aff("")
 {
 }
 
@@ -19,9 +23,12 @@ void GLDisplay::paintGL()
 
     glLoadIdentity();
 
-    glRotatef(_angle, 0.0f, 1.0f, 0.0f);
 
-    lf->affiche();
+    glTranslatef(_deplacementX,_deplacementY,0.f);
+    glRotatef(_angleX, 0.0f, 1.0f, 0.0f);
+    glRotatef(_angleY, 1.0f, 0.0f, 0.0f);
+
+    lf->affiche(aff);
 }
 
 void GLDisplay::resizeGL(int w, int h)
@@ -30,22 +37,32 @@ void GLDisplay::resizeGL(int w, int h)
 
     glViewport(0, 0, w, h);
 
-    glOrtho(-1.5f, 1.5f, -1.5f, 1.5f, -1.5f, 1.5f);
-    //glOrtho(0.0f, windowWidth, windowHeight, 0.0f, 0.0f, 1.0f);
+    glOrtho(-10.5f, 10.5f, -10.5f, 10.5f, -10.5f, 10.5f);
+    //glOrtho(0.0f, w, h, 0.0f, 0.0f, 1.0f);
 
     glMatrixMode(GL_MODELVIEW);
 }
 
 void GLDisplay::mouseMoveEvent(QMouseEvent *event)
 {
+
     if( event != NULL ) {
-        QPoint position = event->pos();
+        std::cout<<event->buttons()<<std::endl;
+        if (event->buttons() == Qt::RightButton){
+            QPoint position = event->pos();
+            _angleX += (position.x() - _position.x());
+            _angleY += (position.y() - _position.y());
+            _position = position;
+             updateGL();
+        }else{
+            QPoint position = event->pos();
+            _deplacementX += (position.x() - _position.x())*0.08;
+            _deplacementY -= (position.y() - _position.y())*0.08;
+            _position = position;
 
-        _angle += (position.x() - _position.x());
+            updateGL();
+        }
 
-        _position = position;
-
-        updateGL();
     }
 }
 

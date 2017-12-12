@@ -15,8 +15,8 @@ int ScalarField::index(int i,int j){
 }
 vec3 ScalarField::P(int i,int j){
     vec3 res;
-    res.x = a.x+((b.x-a.x)/nx-1)*i ; // voir a quoi correspond ax,bx etc ...
-    res.y = a.y+((b.y-a.y)/ny-1)*j ;
+    res.x = a.x+((b.x-a.x)/(nx-1))*i ; // voir a quoi correspond ax,bx etc ...
+    res.y = a.y+((b.y-a.y)/(ny-1))*j ;
     res.z = z[index(i,j)] ;
     return res;
 }

@@ -61,7 +61,7 @@
     <property name="geometry">
      <rect>
       <x>690</x>
-      <y>470</y>
+      <y>550</y>
       <width>151</width>
       <height>31</height>
      </rect>
@@ -74,7 +74,7 @@
     <property name="geometry">
      <rect>
       <x>690</x>
-      <y>430</y>
+      <y>510</y>
       <width>151</width>
       <height>31</height>
      </rect>
@@ -87,7 +87,7 @@
     <property name="geometry">
      <rect>
       <x>690</x>
-      <y>390</y>
+      <y>470</y>
       <width>151</width>
       <height>31</height>
      </rect>
@@ -100,7 +100,7 @@
     <property name="geometry">
      <rect>
       <x>690</x>
-      <y>120</y>
+      <y>200</y>
       <width>151</width>
       <height>191</height>
      </rect>
@@ -108,7 +108,7 @@
     <property name="title">
      <string>Layers</string>
     </property>
-    <widget class="QCheckBox" name="ck_br">
+    <widget class="QRadioButton" name="ck_br">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -121,7 +121,7 @@
       <string>Bedrock</string>
      </property>
     </widget>
-    <widget class="QCheckBox" name="ck_sable">
+    <widget class="QRadioButton" name="ck_sable">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -134,7 +134,7 @@
       <string>Sable</string>
      </property>
     </widget>
-    <widget class="QCheckBox" name="ck_eau">
+    <widget class="QRadioButton" name="ck_eau">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -147,7 +147,7 @@
       <string>Eau</string>
      </property>
     </widget>
-    <widget class="QCheckBox" name="ck_montagne">
+    <widget class="QRadioButton" name="ck_montagne">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -160,7 +160,7 @@
       <string>Montagne</string>
      </property>
     </widget>
-    <widget class="QCheckBox" name="ck_total">
+    <widget class="QRadioButton" name="ck_total">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -198,7 +198,7 @@
     <property name="geometry">
      <rect>
       <x>790</x>
-      <y>320</y>
+      <y>400</y>
       <width>46</width>
       <height>25</height>
      </rect>
@@ -208,7 +208,7 @@
     <property name="geometry">
      <rect>
       <x>740</x>
-      <y>320</y>
+      <y>400</y>
       <width>46</width>
       <height>25</height>
      </rect>
@@ -231,7 +231,7 @@
     <property name="geometry">
      <rect>
       <x>690</x>
-      <y>320</y>
+      <y>400</y>
       <width>55</width>
       <height>21</height>
      </rect>
@@ -244,7 +244,7 @@
     <property name="geometry">
      <rect>
       <x>690</x>
-      <y>340</y>
+      <y>420</y>
       <width>55</width>
       <height>41</height>
      </rect>
@@ -257,7 +257,7 @@
     <property name="geometry">
      <rect>
       <x>740</x>
-      <y>350</y>
+      <y>430</y>
       <width>46</width>
       <height>25</height>
      </rect>
@@ -267,7 +267,7 @@
     <property name="geometry">
      <rect>
       <x>790</x>
-      <y>350</y>
+      <y>430</y>
       <width>46</width>
       <height>25</height>
      </rect>
@@ -284,6 +284,85 @@
     </property>
     <property name="text">
      <string>Change nx/ny</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="box_ax">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>110</y>
+      <width>46</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>110</y>
+      <width>55</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ax/ay</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="box_ay">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>110</y>
+      <width>46</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_change_a_b">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>170</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Change a/b</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>140</y>
+      <width>55</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>bx/by</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="box_by">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>140</y>
+      <width>46</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="box_bx">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>140</y>
+      <width>46</width>
+      <height>25</height>
+     </rect>
     </property>
    </widget>
   </widget>
