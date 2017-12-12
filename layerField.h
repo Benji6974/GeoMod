@@ -7,11 +7,12 @@ class LayerField : public ScalarField
 public:
     LayerField();
     void affiche();
-private:
     HeightField br; // couche bedrock
     HeightField sable; //couche de sable
     HeightField montagne; //couche montagne
     HeightField eau; // couche d'eau
+private:
+
 };
 
 #endif // LAYERFIELD_H

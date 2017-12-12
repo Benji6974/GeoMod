@@ -57,57 +57,24 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QPushButton" name="pushButtonShowHF">
-    <property name="geometry">
-     <rect>
-      <x>700</x>
-      <y>270</y>
-      <width>151</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Show HF</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButtonShowObj">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>60</y>
+      <x>690</x>
+      <y>470</y>
       <width>151</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>Show obj</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEditSaveHFtoObj">
-    <property name="geometry">
-     <rect>
-      <x>700</x>
-      <y>110</y>
-      <width>151</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEditLoadImage">
-    <property name="geometry">
-     <rect>
-      <x>700</x>
-      <y>190</y>
-      <width>151</width>
-      <height>20</height>
-     </rect>
+     <string>Show image</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButtonSaveHFtoObj">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>140</y>
+      <x>690</x>
+      <y>430</y>
       <width>151</width>
       <height>31</height>
      </rect>
@@ -119,24 +86,204 @@
    <widget class="QPushButton" name="pushButtonLoadImage">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>220</y>
+      <x>690</x>
+      <y>390</y>
       <width>151</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>Load Image</string>
+     <string>Load from Image</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEditShowObj">
+   <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>30</y>
+      <x>690</x>
+      <y>120</y>
       <width>151</width>
-      <height>20</height>
+      <height>191</height>
      </rect>
+    </property>
+    <property name="title">
+     <string>Layers</string>
+    </property>
+    <widget class="QCheckBox" name="ck_br">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>30</y>
+       <width>83</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Bedrock</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ck_sable">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>60</y>
+       <width>83</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Sable</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ck_eau">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>90</y>
+       <width>83</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Eau</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ck_montagne">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>120</y>
+       <width>83</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Montagne</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ck_total">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>150</y>
+       <width>83</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Total</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QSpinBox" name="box_nx">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>30</y>
+      <width>46</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="box_ny">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>30</y>
+      <width>46</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="box_hauteurmax">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>320</y>
+      <width>46</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="box_hauteurmin">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>320</y>
+      <width>46</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>30</y>
+      <width>55</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>nx/ny</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>320</y>
+      <width>55</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Hauteur</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>340</y>
+      <width>55</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Dim.</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="box_dimentionMin">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>350</y>
+      <width>46</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="box_dimentionMax">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>350</y>
+      <width>46</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_change_nx_ny">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>70</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Change nx/ny</string>
     </property>
    </widget>
   </widget>

@@ -53,12 +53,12 @@ double ScalarField::height(const double& x, const double& y){
 
 
 
-void ScalarField::load(QString relativePathFileName, vec2 a, vec2  b, float za, float zb){
+void ScalarField::load(QString pathFile, vec2 a, vec2  b, float za, float zb){
 
     this->a = a;
     this->b = b;
 
-    QString pathFile = QDir::currentPath() + relativePathFileName;
+    //QString pathFile = QDir::currentPath() + relativePathFileName;
     QImage img(pathFile);
 
     if(img.isNull())
@@ -75,5 +75,7 @@ void ScalarField::load(QString relativePathFileName, vec2 a, vec2  b, float za, 
             z[index(i,j)] = h;
         }
     }
+
+    std::cout<<"Image lue"<<std::endl;
 
 }

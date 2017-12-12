@@ -14,9 +14,9 @@ HeightField::HeightField()
 
 HeightField::HeightField(int nx, int ny, vec2 a, vec2 b) : ScalarField(nx,ny,a,b){}
 
-void HeightField::save(QString fileName){
+void HeightField::save(QString pathFile){
 
-    QString pathFile = QDir::currentPath() + fileName;
+    //QString pathFile = QDir::currentPath() + fileName;
     if (!pathFile.isNull()){
         QFile file(pathFile);
         if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -45,13 +45,13 @@ void HeightField::save(QString fileName){
             for (int y=0; y<ny-1; y++){
                nbPoints++;
                int num = (y+x*ny)+1;
-               monFlux<<"f"<<" "<<num<<" "<<num+ny+1<<" "<<num+ny<<endl;
-               monFlux<<"f"<<" "<<num<<" "<<num+1<<" "<<num+ny+1<<endl;
+               monFlux<<"f"<<" "<<num<<"//"<<num<<" "<<num+ny+1<<"//"<<num+ny+1<<" "<<num+ny<<"//"<<num+ny<<endl;
+               monFlux<<"f"<<" "<<num<<"//"<<num<<" "<<num+1<<"//"<<num+1<<" "<<num+ny+1<<"//"<<num+ny+1<<endl;
             }
         }
     }
 
-    cout << "heightField sauvegarder dans " + fileName.toStdString() << endl;
+    cout << "heightField sauvegarder dans " + pathFile.toStdString() << endl;
 }
 
 void HeightField::affiche(){
