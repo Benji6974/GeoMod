@@ -4,16 +4,14 @@
 #include "vec.h"
 #include <cmath>
 
+typedef double (*NoiseFunction)(float,float,vec2,vec2);
 
-double testNoiseFunction(float x,float y,vec2 a, vec2 b)
-{
-    return cos(x) + sin(y);
-}
+double testNoiseFunction(float x,float y,vec2 a, vec2 b);
 
 class NoiseF
 {
 public:
-    NoiseF(double (*noiseFunction)(float,float,vec2,vec2),vec2 a, vec2 b);
+    NoiseF(NoiseFunction nFunction,vec2 a, vec2 b);
     double H(float x, float y);
     void setAmplitude(double a[10]);
     void setAmplitude(int index, double a);
@@ -23,7 +21,7 @@ public:
 private:
     double amplitude[10];
     double lambda[10];
-    double (*noiseFunction)(float,float,vec2,vec2);
+    NoiseFunction nF;
     vec2 a;
     vec2 b;
 

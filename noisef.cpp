@@ -1,12 +1,12 @@
 #include "noisef.h"
 
-NoiseF::NoiseF(double (*noiseFunction)(float,float,vec2,vec2),vec2 a, vec2 b) : noiseFunction(noiseFunction),a(a),b(b) {
+NoiseF::NoiseF(NoiseFunction nFunction,vec2 a, vec2 b) : nF(nFunction),a(a),b(b) {
 //choisir valeur par default poour l'amplitude et le lambda
 }
 
 double NoiseF::H(float x, float y)
 {
-    return noiseFunction(x,y,a,b);
+    return nF(x,y,a,b);
 }
 
 void NoiseF::setAmplitude(double a[10])
@@ -33,6 +33,14 @@ void NoiseF::setLambda(double l[10])
 void NoiseF::setLambda(int index, double l)
 {
     this->lambda[index] = l;
+}
+//probleme : savoir ou declarer les fonction de noise
+//si dans .h  ==> erreur multiple declaration
+//si dans .cpp ==> introuvable par le compilateur
+
+double testNoiseFunction(float x,float y,vec2 a, vec2 b)
+{
+    return cos(x) + sin(y);
 }
 
 
