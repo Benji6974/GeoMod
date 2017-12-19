@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->ck_montagne, SIGNAL (released()), this, SLOT (affiche()));
     connect(ui->ck_total, SIGNAL (released()), this, SLOT (affiche()));
     connect(ui->btn_calcul_Tot, SIGNAL (released()), this, SLOT (calculTot()));
+    connect(ui->btn_tri, SIGNAL (released()), this, SLOT (tri()));
 
 
 
@@ -56,6 +57,10 @@ MainWindow::MainWindow(QWidget *parent) :
      ui->box_by->setValue(b.y);
 
     ui->openGLWidget->aff = "br";
+}
+
+void MainWindow::tri(){
+    lf.tri();
 }
 
 void MainWindow::calculTot(){

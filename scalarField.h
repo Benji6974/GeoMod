@@ -26,6 +26,7 @@ public:
     double InterpolationBilineaire(const vec2& uv,double v00,double v01, double v10, double v11);
     void load(QString relativePathFileName, vec2 a, vec2  b, float za, float zb);
     QImage getImage();
+    std::vector<vec3> tri();
 
     QVector<double> z; //Array of height
 

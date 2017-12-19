@@ -345,6 +345,19 @@
      <string>Calcul Total</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btn_tri">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>640</y>
+      <width>80</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Tri</string>
+    </property>
+   </widget>
   </widget>
   <action name="actionSubmenu">
    <property name="text">

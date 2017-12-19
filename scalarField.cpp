@@ -1,6 +1,7 @@
 #include "scalarField.h"
 
 #include <iostream>
+#include <algorithm>
 
 ScalarField::ScalarField()
 {
@@ -157,3 +158,24 @@ QImage ScalarField::getImage()
     }
     return img;
 }
+
+std::vector<vec3> ScalarField::tri(){
+    std::vector<vec3> v = std::vector<vec3>();
+    std::cout<<this->nx<<std::endl;
+    std::cout<<this->ny<<std::endl;
+    /*for(unsigned int i = 0 ; i < this->nx ; i++){
+        for(unsigned int j = 0 ; j < this->ny ; j++){
+        //v.push_back(vec3(x,y,z[index(x,y)]));
+        }
+    }*/
+
+    //std::sort(v.begin(), v.end(),TriAscendant());
+
+    /*for (int i =0; i<v.size();i++){
+        //std::cout<<"z:"<<v[i].z<<" x:"<<v[i].x<<" y:"<<v[i].y<<std::endl;
+    }*/
+
+    return v;
+}
+
+

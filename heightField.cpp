@@ -59,23 +59,50 @@ bool HeightField::save(QString pathFile){
 
 void HeightField::affiche(){
 
-   float color[3];
-   color[0] = 0;
-   color[1] = 1;
-   color[2] = 0;
+
    for (int x=0; x<nx-1; x++ ){
        for (int y=0; y<ny-1; y++ ){
+           float c1 = z[index(x,y)];
+           float c2 = z[index(x,y+1)];
+           float c3 = z[index(x+1,y+1)];
+           float c4 = z[index(x+1,y)];
+
+            c1 = c1/50;
+            c2 = c2/50;
+            c3 = c3/50;
+            c4 = c4/50;
+
+            float color1[3];
+            color1[0] = 0;
+            color1[1] = c1;
+            color1[2] = 0.5;
+
+            float color2[3];
+            color2[0] = 0;
+            color2[1] = c2;
+            color2[2] = 0.5;
+
+            float color3[3];
+            color3[0] = 0;
+            color3[1] = c3;
+            color3[2] = 0.5;
+
+            float color4[3];
+            color4[0] = 0;
+            color4[1] = c4;
+            color4[2] = 0.5;
+
            vec3 p1 = P(x,y);
            vec3 p2 = P(x,y+1);
            vec3 p3 = P(x+1,y+1);
            vec3 p4 = P(x+1,y);
-          drawline(p1,p2,color);
-          drawline(p2,p3,color);
-          drawline(p3,p1,color);
+          drawline(p1,p2,color1);
+          drawline(p2,p3,color2);
+          drawline(p3,p1,color3);
 
-          drawline(p1,p3,color);
-          drawline(p3,p4,color);
-          drawline(p4,p1,color);
+          drawline(p1,p3,color1);
+          drawline(p3,p4,color3);
+          drawline(p4,p1,color4);
        }
    }
 
@@ -223,4 +250,9 @@ vec3 HeightField::normal(vec2 s1){
         return vec3(normalize(qv3_res));
     }
     return vec3(0,0,0);
+}
+
+
+std::vector<vec3> HeightField::tri(){
+    return ScalarField::tri();
 }

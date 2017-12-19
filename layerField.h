@@ -17,6 +17,7 @@ public:
     void heightTotal();
     void changeNxNy(vec2 n);
     void changeAB(vec2 a, vec2 b);
+    std::vector<vec3> tri();
 private:
 
 };

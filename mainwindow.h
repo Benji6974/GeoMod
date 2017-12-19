@@ -37,6 +37,7 @@ private slots:
     void affiche();
     void changeAB();
     void calculTot();
+    void tri();
 };
 
 #endif // MAINWINDOW_H

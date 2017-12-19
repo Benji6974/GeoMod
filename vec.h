@@ -164,6 +164,21 @@ inline std::ostream& operator<<(std::ostream& o, const Vector& v)
     o<<"v("<<v.x<<","<<v.y<<","<<v.z<<")";
     return o;
 }
+struct TriAscendant
+{
+   inline bool operator() (const vec3 & lhs, const vec3 & rhs) const
+   {
+      return lhs.z < rhs.z;
+   }
+};
+
+struct TriDescendant
+{
+   inline bool operator() (const vec3 & lhs, const vec3 & rhs) const
+   {
+      return lhs.z > rhs.z;
+   }
+};
 
 ///@}
 #endif

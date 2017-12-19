@@ -67,6 +67,9 @@ void LayerField::changeAB(vec2 a, vec2 b){
     }
 }
 
+std::vector<vec3> LayerField::tri(){
+    return HeightField::tri();
+}
 
 
 
