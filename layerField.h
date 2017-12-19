@@ -2,7 +2,7 @@
 #define LAYERFIELD_H
 #include "heightField.h"
 
-class LayerField : public ScalarField
+class LayerField : public HeightField
 {
 public:
     LayerField();
@@ -13,7 +13,7 @@ public:
     HeightField sable; //couche de sable
     HeightField montagne; //couche montagne
     HeightField eau; // couche d'eau
-    std::vector<HeightField> vec_HF;
+    std::vector<HeightField*> vec_HF;
     void heightTotal();
     void changeNxNy(vec2 n);
     void changeAB(vec2 a, vec2 b);

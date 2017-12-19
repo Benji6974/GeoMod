@@ -24,11 +24,6 @@ public:
     double heightGrid(int i,int j);
     vec2 getCellSize();
     double InterpolationBilineaire(const vec2& uv,double v00,double v01, double v10, double v11);
-    void save(QString fileName);
-    void affiche();
-    void drawline(vec3 s1, vec3 s2, float color[3]);
-    vec3 normal(vec2 s1);
-    Vector normalTriangle(vec3 s1, vec3 s2, vec3 s3);
     void load(QString relativePathFileName, vec2 a, vec2  b, float za, float zb);
     QImage getImage();
 

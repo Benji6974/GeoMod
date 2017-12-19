@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->ck_eau, SIGNAL (released()), this, SLOT (affiche()));
     connect(ui->ck_montagne, SIGNAL (released()), this, SLOT (affiche()));
     connect(ui->ck_total, SIGNAL (released()), this, SLOT (affiche()));
+    connect(ui->btn_calcul_Tot, SIGNAL (released()), this, SLOT (calculTot()));
 
 
 
@@ -40,11 +41,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->box_hauteurmax->setRange(0, 1000);
     ui->box_hauteurmax->setValue(50);
 
-    // dimentions
-    ui->box_dimentionMin->setRange(0, 1000);
-    ui->box_dimentionMin->setValue(0);
-    ui->box_dimentionMax->setRange(0, 1000);
-    ui->box_dimentionMax->setValue(301);
+
 
      ui->box_ax->setRange(-1000,1000);
      ui->box_ay->setRange(-1000,1000);
@@ -59,6 +56,12 @@ MainWindow::MainWindow(QWidget *parent) :
      ui->box_by->setValue(b.y);
 
     ui->openGLWidget->aff = "br";
+}
+
+void MainWindow::calculTot(){
+    lf.heightTotal();
+    ui->openGLWidget->paintGL();
+    ui->openGLWidget->updateGL();
 }
 
 void MainWindow::affiche(){
@@ -92,13 +95,13 @@ void MainWindow::loadImage(){
     QString fileName = QFileDialog::getOpenFileName(this,tr("Open image"), "", tr("images Files (*)"));
 
     if (ui->ck_br->isChecked() || ui->ck_total->isChecked())
-        lf.br.load(fileName,vec2(ui->box_dimentionMin->value(),ui->box_dimentionMin->value()),vec2(ui->box_dimentionMax->value(),ui->box_dimentionMax->value()),ui->box_hauteurmin->value(),ui->box_hauteurmax->value());
+        lf.br.load(fileName,vec2(ui->box_ax->value(),ui->box_ay->value()),vec2(ui->box_bx->value(),ui->box_by->value()),ui->box_hauteurmin->value(),ui->box_hauteurmax->value());
     if (ui->ck_eau->isChecked() || ui->ck_total->isChecked())
-        lf.eau.load(fileName,vec2(ui->box_dimentionMin->value(),ui->box_dimentionMin->value()),vec2(ui->box_dimentionMax->value(),ui->box_dimentionMax->value()),ui->box_hauteurmin->value(),ui->box_hauteurmax->value());
+        lf.eau.load(fileName,vec2(ui->box_ax->value(),ui->box_ay->value()),vec2(ui->box_bx->value(),ui->box_by->value()),ui->box_hauteurmin->value(),ui->box_hauteurmax->value());
     if (ui->ck_montagne->isChecked() || ui->ck_total->isChecked())
-        lf.montagne.load(fileName,vec2(ui->box_dimentionMin->value(),ui->box_dimentionMin->value()),vec2(ui->box_dimentionMax->value(),ui->box_dimentionMax->value()),ui->box_hauteurmin->value(),ui->box_hauteurmax->value());
+        lf.montagne.load(fileName,vec2(ui->box_ax->value(),ui->box_ay->value()),vec2(ui->box_bx->value(),ui->box_by->value()),ui->box_hauteurmin->value(),ui->box_hauteurmax->value());
     if (ui->ck_sable->isChecked() || ui->ck_total->isChecked())
-        lf.sable.load(fileName,vec2(ui->box_dimentionMin->value(),ui->box_dimentionMin->value()),vec2(ui->box_dimentionMax->value(),ui->box_dimentionMax->value()),ui->box_hauteurmin->value(),ui->box_hauteurmax->value());
+        lf.sable.load(fileName,vec2(ui->box_ax->value(),ui->box_ay->value()),vec2(ui->box_bx->value(),ui->box_by->value()),ui->box_hauteurmin->value(),ui->box_hauteurmax->value());
 
 
 }
@@ -108,18 +111,23 @@ void MainWindow::loadImage(){
  */
 void MainWindow::saveHFtoObj(){
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save obj"), "", tr("Obj files (*.obj)"));
-
+    bool res = false;
     if (ui->ck_br->isChecked())
-        lf.br.save(fileName);
+        res = lf.br.save(fileName);
     if (ui->ck_eau->isChecked())
-        lf.eau.save(fileName);
+        res = lf.eau.save(fileName);
     if (ui->ck_montagne->isChecked())
-        lf.montagne.save(fileName);
+        res = lf.montagne.save(fileName);
     if (ui->ck_sable->isChecked())
-        lf.sable.save(fileName);
+        res = lf.sable.save(fileName);
     if (ui->ck_total->isChecked())
-        lf.save(fileName);
-        return;
+        res = lf.save(fileName);
+
+    if (res)
+        QMessageBox::information(this, "OK", "Fichier .obj sauvegardée");
+    else
+        QMessageBox::critical(this, "Erreur", "Erreur lors de l'enregistrement");
+
 
 }
 

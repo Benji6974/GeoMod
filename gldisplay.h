@@ -31,8 +31,9 @@ private:
 
     float _angleX;
     float _angleY;
-    float _deplacementY;
+
     float _deplacementX;
+    float _deplacementY;
     QPoint _position;
 
     

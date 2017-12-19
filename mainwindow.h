@@ -12,6 +12,7 @@
  #include <QTextStream>
  #include <QFile>
 #include <QCheckBox>
+#include <QMessageBox>
 
 namespace Ui {
 class MainWindow;
@@ -35,6 +36,7 @@ private slots:
     void changeNxNy();
     void affiche();
     void changeAB();
+    void calculTot();
 };
 
 #endif // MAINWINDOW_H
