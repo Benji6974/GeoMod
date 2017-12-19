@@ -163,17 +163,17 @@ std::vector<vec3> ScalarField::tri(){
     std::vector<vec3> v = std::vector<vec3>();
     std::cout<<this->nx<<std::endl;
     std::cout<<this->ny<<std::endl;
-    /*for(unsigned int i = 0 ; i < this->nx ; i++){
-        for(unsigned int j = 0 ; j < this->ny ; j++){
-        //v.push_back(vec3(x,y,z[index(x,y)]));
+    for(unsigned int x = 0 ; x < this->nx ; x++){
+        for(unsigned int y = 0 ; y < this->ny ; y++){
+            v.push_back(vec3(x,y,z[index(x,y)]));
         }
-    }*/
+    }
 
-    //std::sort(v.begin(), v.end(),TriAscendant());
+    std::sort(v.begin(), v.end(),TriDescendant());
 
-    /*for (int i =0; i<v.size();i++){
-        //std::cout<<"z:"<<v[i].z<<" x:"<<v[i].x<<" y:"<<v[i].y<<std::endl;
-    }*/
+    for (int i =0; i<v.size();i++){
+        std::cout<<"z:"<<v[i].z<<" x:"<<v[i].x<<" y:"<<v[i].y<<std::endl;
+    }
 
     return v;
 }
