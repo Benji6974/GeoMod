@@ -26,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->ck_total, SIGNAL (released()), this, SLOT (affiche()));
     connect(ui->btn_calcul_Tot, SIGNAL (released()), this, SLOT (calculTot()));
     connect(ui->btn_tri, SIGNAL (released()), this, SLOT (tri()));
+    connect(ui->btn_saveimg, SIGNAL (released()), this, SLOT (saveHFtojpg()));
+
 
 
 
@@ -130,6 +132,34 @@ void MainWindow::saveHFtoObj(){
 
     if (res)
         QMessageBox::information(this, "OK", "Fichier .obj sauvegardée");
+    else
+        QMessageBox::critical(this, "Erreur", "Erreur lors de l'enregistrement");
+
+
+}
+
+/**
+ * @brief MainWindow::saveHFtoObj on sauvegarde une heightmap en obj
+ */
+void MainWindow::saveHFtojpg(){
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
+                                                  "",
+                                                  tr("Images (*.bmp);;Images (*.jpg);;Images (*.png);;Images (*.ppm);;Images (*.tif);;Images (*.xbm);;Images (*.xpm)"));
+    std::cout<<"debut"<<std::endl;
+    bool res = false;
+    if (ui->ck_br->isChecked())
+        res = lf.br.saveImg(fileName);
+    if (ui->ck_eau->isChecked())
+        res = lf.eau.saveImg(fileName);
+    if (ui->ck_montagne->isChecked())
+        res = lf.montagne.saveImg(fileName);
+    if (ui->ck_sable->isChecked())
+        res = lf.sable.saveImg(fileName);
+    if (ui->ck_total->isChecked())
+        res = lf.saveImg(fileName);
+    std::cout<<"fin"<<std::endl;
+    if (res)
+        QMessageBox::information(this, "OK", "Fichier sauvegardée");
     else
         QMessageBox::critical(this, "Erreur", "Erreur lors de l'enregistrement");
 

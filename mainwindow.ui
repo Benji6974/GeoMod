@@ -358,6 +358,19 @@
      <string>Tri</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btn_saveimg">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>590</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save image</string>
+    </property>
+   </widget>
   </widget>
   <action name="actionSubmenu">
    <property name="text">

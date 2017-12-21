@@ -139,8 +139,8 @@ void ScalarField::load(QString pathFile, vec2 a, vec2  b, float za, float zb){
 
 QImage ScalarField::getImage()
 {
-    QImage img;
-
+    QImage img = QImage(nx,ny,QImage::Format_RGB32);
+    std::cout<<"debut gen image"<<std::endl;
     if(nx + ny < 1)
         return img;
 
@@ -148,16 +148,19 @@ QImage ScalarField::getImage()
     {
         for(int j = 0 ; j < this->ny ; j++)
         {
-            /*
-            img.set
-            int value =  qGray(img.pixel(i,j));
-            double h = ((double)value/255.f)*(zb-za) + za;
-            z[index(i,j)] = h;
-            */
+            float color;
+            vec2 res = calculMinMax();
+            color = (z[index(i,j)]-res.x)/(res.y-res.x);
+            QColor s;
+            s.setHsv(0,0,color);
+            img.setPixelColor(i,j,s);
         }
     }
+    std::cout<<"fin gen image"<<std::endl;
     return img;
 }
+
+
 
 std::vector<vec3> ScalarField::tri(){
     std::vector<vec3> v = std::vector<vec3>();
@@ -176,6 +179,71 @@ std::vector<vec3> ScalarField::tri(){
     }
 
     return v;
+}
+
+float ScalarField::pente(vec2 source, vec2 destination){
+    return z[index(destination.x, destination.y)] - z[index(source.x, source.y)];
+}
+
+ScalarField ScalarField::ecoulement(){
+    ScalarField sf = ScalarField(nx,ny,a,b);
+    std::vector<vec3> sftri = tri();
+    for(unsigned int a = 0 ; a < sftri.size() ; a++){
+        majVoisinEcoulement(sftri[a],sf);
+    }
+}
+
+void ScalarField::majVoisinEcoulement(vec3 pos, ScalarField sf){
+    std::vector<vec3> v = std::vector<vec3>();
+    if (pos.x+1 < nx){
+        v.push_back(vec3(pos.x+1,pos.y,pente(vec2(pos.x, pos.y),vec2(pos.x+1, pos.y))));
+        if (pos.y+1 < ny)
+            v.push_back(vec3(pos.x+1,pos.y+1,pente(vec2(pos.x, pos.y),vec2(pos.x+1, pos.y+1))));
+        if (pos.y-1 > 0)
+            v.push_back(vec3(pos.x+1,pos.y-1,pente(vec2(pos.x, pos.y),vec2(pos.x+1, pos.y-1))));
+    }
+    if (pos.x-1 > 0){
+        v.push_back(vec3(pos.x-1,pos.y,pente(vec2(pos.x, pos.y),vec2(pos.x-1, pos.y))));
+        if (pos.y+1 < ny)
+            v.push_back(vec3(pos.x-1,pos.y+1,pente(vec2(pos.x, pos.y),vec2(pos.x-1, pos.y+1))));
+        if (pos.y-1 > 0)
+            v.push_back(vec3(pos.x-1,pos.y-1,pente(vec2(pos.x, pos.y),vec2(pos.x-1, pos.y-1))));
+    }
+    if (pos.y+1 < ny)
+        v.push_back(vec3(pos.x,pos.y+1,pente(vec2(pos.x, pos.y),vec2(pos.x, pos.y+1))));
+    if (pos.y-1 > 0)
+        v.push_back(vec3(pos.x,pos.y-1,pente(vec2(pos.x, pos.y),vec2(pos.x, pos.y-1))));
+
+
+    std::sort(v.begin(), v.end(),TriAscendant());
+    float somme=0;
+    float val = sf.z[index(pos.x,pos.y)]+1; //ajout de 1 a toute la map
+    for(unsigned int i = 0; i<v.size(); i++){
+        if (v[i].z <0){
+            somme += v[i].z;
+        }
+    }
+    for(unsigned int i = 0; i<v.size(); i++){
+        if (v[i].z <0){
+            float pourcentage = (-v[i].z)/(-somme);
+            sf.z[index(v[i].x,v[i].y)] += val*pourcentage;
+        }
+    }
+
+}
+
+vec2 ScalarField::calculMinMax(){
+    float min = 999;
+    float max = -999;
+    for(unsigned int x = 0 ; x < this->nx ; x++){
+        for(unsigned int y = 0 ; y < this->ny ; y++){
+            if (z[index(x,y)] < min)
+                min = z[index(x,y)];
+            if (z[index(x,y)] > max)
+                max = z[index(x,y)];
+        }
+    }
+    return vec2(min, max);
 }
 
 

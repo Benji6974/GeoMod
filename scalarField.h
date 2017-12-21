@@ -27,6 +27,11 @@ public:
     void load(QString relativePathFileName, vec2 a, vec2  b, float za, float zb);
     QImage getImage();
     std::vector<vec3> tri();
+    float pente(vec2 source, vec2 destination);
+    void majVoisinEcoulement(vec3 pos, ScalarField sf);
+    ScalarField ecoulement();
+    vec2 calculMinMax();
+
 
     QVector<double> z; //Array of height
 
