@@ -27,6 +27,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->btn_calcul_Tot, SIGNAL (released()), this, SLOT (calculTot()));
     connect(ui->btn_tri, SIGNAL (released()), this, SLOT (tri()));
     connect(ui->btn_saveimg, SIGNAL (released()), this, SLOT (saveHFtojpg()));
+    connect(ui->btn_showImg, SIGNAL (released()), this, SLOT (afficheImage()));
+
 
 
 
@@ -61,8 +63,44 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->openGLWidget->aff = "br";
 }
 
+void MainWindow::afficheImage(){
+    QImage img;
+    if (ui->ck_br->isChecked())
+        img = lf.br.getImage();
+    if (ui->ck_eau->isChecked())
+       img = lf.eau.getImage();
+    if (ui->ck_montagne->isChecked())
+        img = lf.montagne.getImage();
+    if (ui->ck_sable->isChecked())
+        img = lf.sable.getImage();
+    if (ui->ck_total->isChecked())
+        img = lf.getImage();
+    QGraphicsPixmapItem item(QPixmap::fromImage(img));
+    scene->addItem(&item);
+
+    ui->graphicsView->setScene(scene);
+    ui->graphicsView->show();
+
+
+
+
+}
+
 void MainWindow::tri(){
-    lf.tri();
+    ScalarField riviere = lf.ecoulement();
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
+                                                  "",
+                                                  tr("Images (*.bmp);;Images (*.jpg);;Images (*.png);;Images (*.ppm);;Images (*.tif);;Images (*.xbm);;Images (*.xpm)"));
+    std::cout<<"debut"<<std::endl;
+    bool res = false;
+    //riviere. TOTO : ici trouver moyen de sauvegarder
+    std::cout<<"fin"<<std::endl;
+
+
+    if (res)
+        QMessageBox::information(this, "OK", "Fichier sauvegardée");
+    else
+        QMessageBox::critical(this, "Erreur", "Erreur lors de l'enregistrement");
 }
 
 void MainWindow::calculTot(){
@@ -158,6 +196,8 @@ void MainWindow::saveHFtojpg(){
     if (ui->ck_total->isChecked())
         res = lf.saveImg(fileName);
     std::cout<<"fin"<<std::endl;
+
+
     if (res)
         QMessageBox::information(this, "OK", "Fichier sauvegardée");
     else

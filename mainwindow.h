@@ -39,6 +39,7 @@ private slots:
     void calculTot();
     void tri();
     void saveHFtojpg();
+    void afficheImage();
 };
 
 #endif // MAINWINDOW_H

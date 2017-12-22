@@ -57,7 +57,7 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QPushButton" name="pushButtonShowObj">
+   <widget class="QPushButton" name="btn_showImg">
     <property name="geometry">
      <rect>
       <x>690</x>

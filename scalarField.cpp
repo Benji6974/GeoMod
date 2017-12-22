@@ -144,16 +144,20 @@ QImage ScalarField::getImage()
     if(nx + ny < 1)
         return img;
 
+     vec2 res = calculMinMax();
+     std::cout<<"min:"<<res.x<<" max:"<<res.y<<std::endl;
     for(int i = 0 ; i < this->nx ; i++)
     {
         for(int j = 0 ; j < this->ny ; j++)
         {
             float color;
-            vec2 res = calculMinMax();
-            color = (z[index(i,j)]-res.x)/(res.y-res.x);
+
+            color = ((z[index(i,j)]-res.x)/(res.y-res.x))*100;
             QColor s;
             s.setHsv(0,0,color);
+            //std::cout<<"color:"<<color<<std::endl;
             img.setPixelColor(i,j,s);
+            //std::cout<<"x:"<<i<<" y:"<<j<<std::endl;
         }
     }
     std::cout<<"fin gen image"<<std::endl;
