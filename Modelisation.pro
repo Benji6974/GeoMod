@@ -24,7 +24,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 
 SOURCES += main.cpp \
-    noisef.cpp \
     vec.cpp \
  #   image.cpp \
  #   image_io.cpp \
@@ -35,10 +34,10 @@ SOURCES += main.cpp \
     box2.cpp \
     array2.cpp \
     gldisplay.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    noiseField.cpp
 
 HEADERS += \
-    noisef.h \
     vec.h \
   #  image.h \
   #  image_io.h \
@@ -49,7 +48,8 @@ HEADERS += \
     box2.h \
     array2.h \
     gldisplay.h \
-    mainwindow.h
+    mainwindow.h \
+    noiseField.h
 
 FORMS += \
     mainwindow.ui
