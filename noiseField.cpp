@@ -60,7 +60,7 @@ void NoiseField::generate()
 double NoiseField::perlinNoise(int octaves, double frequency,
         double persistence, double x)
 {
-
+    /*
     double r = 0.;
     double f = frequency;
     double amplitude = 1.;
@@ -75,6 +75,7 @@ double NoiseField::perlinNoise(int octaves, double frequency,
     double geo_lim = (1 - persistence) / (1 - amplitude);
 
     return r * geo_lim;
+    */
 }
 
 

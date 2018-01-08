@@ -33,6 +33,10 @@ public:
     vec2 calculMinMax();
     bool saveImg(QString s);
 
+    vec2 Gradiant(int i, int j);
+    vec2 longueurE();
+
+
 
 
 

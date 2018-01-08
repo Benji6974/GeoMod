@@ -189,6 +189,17 @@ float ScalarField::pente(vec2 source, vec2 destination){
     return z[index(destination.x, destination.y)] - z[index(source.x, source.y)];
 }
 
+vec2 ScalarField::Gradiant(int i, int j){
+    vec2 dist = longueurE();
+    float sx = (P(i+1,j).z - P(i-1,j).z) / 2;
+    return vec2();
+}
+
+vec2 ScalarField::longueurE()
+{
+    return vec2((b.x - a.x) / nx,(b.y - a.y) / ny);
+}
+
 ScalarField ScalarField::ecoulement(){
     ScalarField sf = ScalarField(nx,ny,a,b);
     std::vector<vec3> sftri = tri();
