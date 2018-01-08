@@ -257,11 +257,4 @@ std::vector<vec3> HeightField::tri(){
     return ScalarField::tri();
 }
 
-bool HeightField::saveImg(QString s){
 
-        QString extension = QString(s[s.length()-3])+QString(s[s.length()-2])+QString(s[s.length()-1]);
-        const char * extensionEnChar = extension.toStdString().c_str();
-        QImage img = getImage();
-        img.save(s, extensionEnChar);
-        return true;
-}

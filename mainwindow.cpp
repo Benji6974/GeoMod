@@ -10,9 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    scene = new QGraphicsScene(this);
-    ui->graphicsView->setScene(scene);
-    ui->graphicsView->scale(10,10);
+
 
     ui->openGLWidget->lf = &lf;
     ui->ck_br->setChecked(true);
@@ -75,13 +73,14 @@ void MainWindow::afficheImage(){
         img = lf.sable.getImage();
     if (ui->ck_total->isChecked())
         img = lf.getImage();
-    QGraphicsPixmapItem item(QPixmap::fromImage(img));
-    scene->addItem(&item);
+    ui->labelImage->setPixmap(QPixmap::fromImage(img));
+    ui->labelImage->adjustSize();
+    ui->labelImage->setScaledContents(true);
 
-    ui->graphicsView->setScene(scene);
-    ui->graphicsView->show();
-
-
+   /* QSize labelSize = ui->labelImage->size();
+    pixMap = pixMap.scaled(labelSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
+    fondOnglet->setPixmap(pixMap);
+*/
 
 
 }

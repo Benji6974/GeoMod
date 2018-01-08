@@ -31,11 +31,13 @@ public:
     void majVoisinEcoulement(vec3 pos, ScalarField sf);
     ScalarField ecoulement();
     vec2 calculMinMax();
+    bool saveImg(QString s);
 
 
-    QVector<double> z; //Array of height
+
 
 protected:
+      QVector<double> z; //Array of height
 
 };
 #endif // SCALARFIELD_H

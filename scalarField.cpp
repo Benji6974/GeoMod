@@ -250,4 +250,13 @@ vec2 ScalarField::calculMinMax(){
     return vec2(min, max);
 }
 
+bool ScalarField::saveImg(QString s){
+
+        QString extension = QString(s[s.length()-3])+QString(s[s.length()-2])+QString(s[s.length()-1]);
+        const char * extensionEnChar = extension.toStdString().c_str();
+        QImage img = getImage();
+        img.save(s, extensionEnChar);
+        return true;
+}
+
 
