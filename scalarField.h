@@ -32,7 +32,7 @@ public:
     ScalarField ecoulement();
     vec2 calculMinMax();
     bool saveImg(QString s);
-
+    void changeSizeZ();
 
 
 

@@ -61,10 +61,13 @@ void LayerField::changeNxNy(vec2 n){
 void LayerField::changeAB(vec2 a, vec2 b){
     this->setA(a);
     this->setB(b);
+    changeSizeZ();
     for (unsigned int i=0; i<vec_HF.size(); i++){
        vec_HF[i]->setA(a);
        vec_HF[i]->setB(b);
+       vec_HF[i]->changeSizeZ();
     }
+
 }
 
 std::vector<vec3> LayerField::tri(){

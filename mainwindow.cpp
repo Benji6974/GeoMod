@@ -73,27 +73,41 @@ void MainWindow::afficheImage(){
         img = lf.sable.getImage();
     if (ui->ck_total->isChecked())
         img = lf.getImage();
-    ui->labelImage->setPixmap(QPixmap::fromImage(img));
+
+    QPixmap qpix = QPixmap::fromImage(img);
+    QSize labelSize = ui->labelImage->size();
+    qpix = qpix.scaled(labelSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
+    ui->labelImage->setPixmap(qpix);
     ui->labelImage->adjustSize();
     ui->labelImage->setScaledContents(true);
 
-   /* QSize labelSize = ui->labelImage->size();
-    pixMap = pixMap.scaled(labelSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
-    fondOnglet->setPixmap(pixMap);
-*/
+
 
 
 }
 
 void MainWindow::tri(){
-    ScalarField riviere = lf.ecoulement();
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
+    ScalarField riviere = lf.br.ecoulement();
+   /* QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
                                                   "",
                                                   tr("Images (*.bmp);;Images (*.jpg);;Images (*.png);;Images (*.ppm);;Images (*.tif);;Images (*.xbm);;Images (*.xpm)"));
+    */
+    QImage img = riviere.getImage();
+    QPixmap qpix = QPixmap::fromImage(img);
+    QSize labelSize = ui->labelImage->size();
+    qpix = qpix.scaled(labelSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
+    ui->labelImage->setPixmap(qpix);
+    ui->labelImage->adjustSize();
+    ui->labelImage->setScaledContents(true);
+
+
+
     std::cout<<"debut"<<std::endl;
     bool res = false;
     //riviere. TOTO : ici trouver moyen de sauvegarder
     std::cout<<"fin"<<std::endl;
+
+
 
 
     if (res)

@@ -13,9 +13,14 @@ ScalarField::ScalarField(int nx, int ny, vec2 a, vec2 b): Array2(nx,ny,a,b)
     z = QVector<double>(nx*ny);
 }
 
+void ScalarField::changeSizeZ(){
+    z = QVector<double>(getNxNy().x*getNxNy().y);
+}
+
 int ScalarField::index(int i,int j){
     return i*ny+j;
 }
+
 vec3 ScalarField::P(int i,int j){
     vec3 res;
     res.x = a.x+((b.x-a.x)/(nx-1))*i ; // voir a quoi correspond ax,bx etc ...
@@ -161,7 +166,8 @@ QImage ScalarField::getImage()
         }
     }
     std::cout<<"fin gen image"<<std::endl;
-    return img;
+    QTransform t;
+    return img.transformed(t.rotate(-90));
 }
 
 
@@ -178,9 +184,9 @@ std::vector<vec3> ScalarField::tri(){
 
     std::sort(v.begin(), v.end(),TriDescendant());
 
-    for (int i =0; i<v.size();i++){
+    /*for (int i =0; i<v.size();i++){
         std::cout<<"z:"<<v[i].z<<" x:"<<v[i].x<<" y:"<<v[i].y<<std::endl;
-    }
+    }*/
 
     return v;
 }
@@ -195,6 +201,15 @@ ScalarField ScalarField::ecoulement(){
     for(unsigned int a = 0 ; a < sftri.size() ; a++){
         majVoisinEcoulement(sftri[a],sf);
     }
+
+    /*for(unsigned int x = 0 ; x < sf.getNxNy().x ; x++){
+        for(unsigned int y = 0 ; y < sf.getNxNy().y ; y++){
+                std::cout<<"z : "<< z[index(x,y)]<< std::endl;
+        }
+    }*/
+    return sf;
+
+
 }
 
 void ScalarField::majVoisinEcoulement(vec3 pos, ScalarField sf){
@@ -217,7 +232,6 @@ void ScalarField::majVoisinEcoulement(vec3 pos, ScalarField sf){
         v.push_back(vec3(pos.x,pos.y+1,pente(vec2(pos.x, pos.y),vec2(pos.x, pos.y+1))));
     if (pos.y-1 > 0)
         v.push_back(vec3(pos.x,pos.y-1,pente(vec2(pos.x, pos.y),vec2(pos.x, pos.y-1))));
-
 
     std::sort(v.begin(), v.end(),TriAscendant());
     float somme=0;
