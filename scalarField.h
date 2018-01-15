@@ -34,6 +34,10 @@ public:
     bool saveImg(QString s);
     void changeSizeZ();
 
+    vec2 Gradiant(int i, int j);
+    vec2 longueurE();
+
+
 
 
 protected:
