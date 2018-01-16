@@ -13,6 +13,16 @@ ScalarField::ScalarField(int nx, int ny, vec2 a, vec2 b): Array2(nx,ny,a,b)
     z = QVector<double>(nx*ny);
 }
 
+void ScalarField::setAllZ(double val){
+    for(int i = 0 ; i < this->nx ; i++)
+    {
+        for(int j = 0 ; j < this->ny ; j++)
+        {
+            z[index(i,j)] = val;
+        }
+    }
+}
+
 void ScalarField::changeSizeZ(){
     z = QVector<double>(getNxNy().x*getNxNy().y);
 }
@@ -151,20 +161,30 @@ QImage ScalarField::getImage()
 
      vec2 res = calculMinMax();
      std::cout<<"min:"<<res.x<<" max:"<<res.y<<std::endl;
-    for(int i = 0 ; i < this->nx ; i++)
-    {
-        for(int j = 0 ; j < this->ny ; j++)
-        {
-            float color;
-
-            color = ((z[index(i,j)]-res.x)/(res.y-res.x))*100;
-            QColor s;
-            s.setHsv(0,0,color);
-            //std::cout<<"color:"<<color<<std::endl;
-            img.setPixelColor(i,j,s);
-            //std::cout<<"x:"<<i<<" y:"<<j<<std::endl;
-        }
+     if (res.x == res.y){
+         for(int i = 0 ; i < this->nx ; i++)
+         {
+             for(int j = 0 ; j < this->ny ; j++)
+             {
+                 QColor s;
+                 s.setHsv(0,0,0);
+                 img.setPixelColor(i,j,s);
+             }
+         }
+     }else{
+         for(int i = 0 ; i < this->nx ; i++)
+         {
+             for(int j = 0 ; j < this->ny ; j++)
+             {
+                 int color;
+                 color = ((z[index(i,j)]-res.x)/(res.y-res.x))*255;
+                 QColor s;
+                 s.setHsv(0,0,color);
+                 img.setPixelColor(i,j,s);
+             }
+         }
     }
+
     std::cout<<"fin gen image"<<std::endl;
     QTransform t;
     return img.transformed(t.rotate(-90));
@@ -176,8 +196,8 @@ std::vector<vec3> ScalarField::tri(){
     std::vector<vec3> v = std::vector<vec3>();
     std::cout<<this->nx<<std::endl;
     std::cout<<this->ny<<std::endl;
-    for(unsigned int x = 0 ; x < this->nx ; x++){
-        for(unsigned int y = 0 ; y < this->ny ; y++){
+    for(int x = 0 ; x < this->nx ; x++){
+        for(int y = 0 ; y < this->ny ; y++){
             v.push_back(vec3(x,y,z[index(x,y)]));
         }
     }
@@ -191,14 +211,16 @@ std::vector<vec3> ScalarField::tri(){
     return v;
 }
 
+
 float ScalarField::pente(vec2 source, vec2 destination){
     return z[index(destination.x, destination.y)] - z[index(source.x, source.y)];
 }
 
 vec2 ScalarField::Gradiant(int i, int j){
     vec2 dist = longueurE();
-    float sx = (P(i+1,j).z - P(i-1,j).z) / 2;
-    return vec2();
+    float sx = (P(i+1,j).z - P(i-1,j).z) / (2*dist.x);
+    float sy = (P(i,j+1).z - P(i,j-1).z) / (2*dist.y);
+    return vec2(sx,sy);
 }
 
 vec2 ScalarField::longueurE()
@@ -206,66 +228,11 @@ vec2 ScalarField::longueurE()
     return vec2((b.x - a.x) / nx,(b.y - a.y) / ny);
 }
 
-ScalarField ScalarField::ecoulement(){
-    ScalarField sf = ScalarField(nx,ny,a,b);
-    std::vector<vec3> sftri = tri();
-    for(unsigned int a = 0 ; a < sftri.size() ; a++){
-        majVoisinEcoulement(sftri[a],sf);
-    }
-
-    /*for(unsigned int x = 0 ; x < sf.getNxNy().x ; x++){
-        for(unsigned int y = 0 ; y < sf.getNxNy().y ; y++){
-                std::cout<<"z : "<< z[index(x,y)]<< std::endl;
-        }
-    }*/
-    return sf;
-
-
-}
-
-void ScalarField::majVoisinEcoulement(vec3 pos, ScalarField sf){
-    std::vector<vec3> v = std::vector<vec3>();
-    if (pos.x+1 < nx){
-        v.push_back(vec3(pos.x+1,pos.y,pente(vec2(pos.x, pos.y),vec2(pos.x+1, pos.y))));
-        if (pos.y+1 < ny)
-            v.push_back(vec3(pos.x+1,pos.y+1,pente(vec2(pos.x, pos.y),vec2(pos.x+1, pos.y+1))));
-        if (pos.y-1 > 0)
-            v.push_back(vec3(pos.x+1,pos.y-1,pente(vec2(pos.x, pos.y),vec2(pos.x+1, pos.y-1))));
-    }
-    if (pos.x-1 > 0){
-        v.push_back(vec3(pos.x-1,pos.y,pente(vec2(pos.x, pos.y),vec2(pos.x-1, pos.y))));
-        if (pos.y+1 < ny)
-            v.push_back(vec3(pos.x-1,pos.y+1,pente(vec2(pos.x, pos.y),vec2(pos.x-1, pos.y+1))));
-        if (pos.y-1 > 0)
-            v.push_back(vec3(pos.x-1,pos.y-1,pente(vec2(pos.x, pos.y),vec2(pos.x-1, pos.y-1))));
-    }
-    if (pos.y+1 < ny)
-        v.push_back(vec3(pos.x,pos.y+1,pente(vec2(pos.x, pos.y),vec2(pos.x, pos.y+1))));
-    if (pos.y-1 > 0)
-        v.push_back(vec3(pos.x,pos.y-1,pente(vec2(pos.x, pos.y),vec2(pos.x, pos.y-1))));
-
-    std::sort(v.begin(), v.end(),TriAscendant());
-    float somme=0;
-    float val = sf.z[index(pos.x,pos.y)]+1; //ajout de 1 a toute la map
-    for(unsigned int i = 0; i<v.size(); i++){
-        if (v[i].z <0){
-            somme += v[i].z;
-        }
-    }
-    for(unsigned int i = 0; i<v.size(); i++){
-        if (v[i].z <0){
-            float pourcentage = (-v[i].z)/(-somme);
-            sf.z[index(v[i].x,v[i].y)] += val*pourcentage;
-        }
-    }
-
-}
-
 vec2 ScalarField::calculMinMax(){
     float min = 999;
     float max = -999;
-    for(unsigned int x = 0 ; x < this->nx ; x++){
-        for(unsigned int y = 0 ; y < this->ny ; y++){
+    for(int x = 0 ; x < this->nx ; x++){
+        for(int y = 0 ; y < this->ny ; y++){
             if (z[index(x,y)] < min)
                 min = z[index(x,y)];
             if (z[index(x,y)] > max)
@@ -282,6 +249,16 @@ bool ScalarField::saveImg(QString s){
         QImage img = getImage();
         img.save(s, extensionEnChar);
         return true;
+}
+
+
+
+void ScalarField::setZ(int i,int j, double val){
+    z[index(i,j)] = val;
+}
+
+double ScalarField::getZ(int i,int j){
+    return z[index(i,j)];
 }
 
 

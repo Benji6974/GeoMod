@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>862</width>
+    <width>1030</width>
     <height>776</height>
    </rect>
   </property>
@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -60,319 +60,584 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QPushButton" name="btn_showImg">
+   <widget class="QTabWidget" name="tabWidget_2">
     <property name="geometry">
      <rect>
       <x>690</x>
-      <y>550</y>
-      <width>151</width>
-      <height>31</height>
+      <y>10</y>
+      <width>321</width>
+      <height>711</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Show image</string>
+    <property name="currentIndex">
+     <number>1</number>
     </property>
-   </widget>
-   <widget class="QPushButton" name="pushButtonSaveHFtoObj">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>510</y>
-      <width>151</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Save HF to obj</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButtonLoadImage">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>470</y>
-      <width>151</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Load from Image</string>
-    </property>
-   </widget>
-   <widget class="QGroupBox" name="groupBox">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>200</y>
-      <width>151</width>
-      <height>191</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Layers</string>
-    </property>
-    <widget class="QRadioButton" name="ck_br">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>30</y>
-       <width>83</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Bedrock</string>
-     </property>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>Base</string>
+     </attribute>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>55</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>nx/ny</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="box_nx">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>10</y>
+        <width>46</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="box_ny">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>10</y>
+        <width>46</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_change_nx_ny">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>151</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Change nx/ny</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>90</y>
+        <width>55</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ax/ay</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>130</y>
+        <width>55</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>bx/by</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="box_ax">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>90</y>
+        <width>51</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="box_ay">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>90</y>
+        <width>51</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="box_bx">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>130</y>
+        <width>51</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="box_by">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>130</y>
+        <width>51</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_change_a_b">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>170</y>
+        <width>151</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Change a/b</string>
+      </property>
+     </widget>
     </widget>
-    <widget class="QRadioButton" name="ck_sable">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>60</y>
-       <width>83</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Sable</string>
-     </property>
+    <widget class="QWidget" name="tab_4">
+     <attribute name="title">
+      <string>Layers</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>141</width>
+        <height>191</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Layers</string>
+      </property>
+      <widget class="QRadioButton" name="ck_br">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>30</y>
+         <width>83</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Bedrock</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="ck_sable">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>60</y>
+         <width>83</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Sable</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="ck_eau">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>90</y>
+         <width>83</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Eau</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="ck_montagne">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>120</y>
+         <width>83</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Montagne</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="ck_total">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>150</y>
+         <width>83</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Total</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>55</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Hauteur</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="box_hauteurmin">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>20</y>
+        <width>46</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="box_hauteurmax">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>20</y>
+        <width>46</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonLoadImage">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>10</y>
+        <width>121</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Load from Image</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonSaveHFtoObj">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>600</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Save HF to obj</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_showImg">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>270</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Show image</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_saveimg">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>640</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Save image</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_calcul_Tot">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>80</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Calcul Total</string>
+      </property>
+     </widget>
+     <widget class="Line" name="line">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>50</y>
+        <width>281</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>120</y>
+        <width>141</width>
+        <height>191</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Affichage Total</string>
+      </property>
+      <widget class="QRadioButton" name="ck_simple">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>30</y>
+         <width>83</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Simple</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="ck_drainage">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>90</y>
+         <width>83</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Drainage</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="ck_humidite">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>120</y>
+         <width>83</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Humiditee</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="ck_lumiere">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>150</y>
+         <width>83</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Lumière</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="ck_slope">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>60</y>
+         <width>83</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Slope</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>330</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>XHumiditee :</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="humiditeFactor">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>330</y>
+        <width>64</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="value">
+       <double>1.000000000000000</double>
+      </property>
+     </widget>
     </widget>
-    <widget class="QRadioButton" name="ck_eau">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>90</y>
-       <width>83</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Eau</string>
-     </property>
+    <widget class="QWidget" name="tab_5">
+     <attribute name="title">
+      <string>Noise</string>
+     </attribute>
+     <widget class="QSlider" name="horizontalSlider">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>40</y>
+        <width>160</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="horizontalSlider_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>90</y>
+        <width>160</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="horizontalSlider_3">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>150</y>
+        <width>160</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="horizontalSlider_4">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>210</y>
+        <width>160</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Param 1</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>70</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Param 2</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>130</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Param 3</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>190</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Param 4</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_calcul_Tot_2">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>290</y>
+        <width>151</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Ajouter au Layer</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_calcul_Tot_3">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>330</y>
+        <width>151</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Afficher image</string>
+      </property>
+     </widget>
     </widget>
-    <widget class="QRadioButton" name="ck_montagne">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>120</y>
-       <width>83</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Montagne</string>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="ck_total">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>150</y>
-       <width>83</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Total</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QSpinBox" name="box_nx">
-    <property name="geometry">
-     <rect>
-      <x>740</x>
-      <y>30</y>
-      <width>46</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="box_ny">
-    <property name="geometry">
-     <rect>
-      <x>790</x>
-      <y>30</y>
-      <width>46</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="box_hauteurmax">
-    <property name="geometry">
-     <rect>
-      <x>790</x>
-      <y>400</y>
-      <width>46</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="box_hauteurmin">
-    <property name="geometry">
-     <rect>
-      <x>740</x>
-      <y>400</y>
-      <width>46</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>30</y>
-      <width>55</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>nx/ny</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>400</y>
-      <width>55</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Hauteur</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_change_nx_ny">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>70</y>
-      <width>151</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Change nx/ny</string>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="box_ax">
-    <property name="geometry">
-     <rect>
-      <x>740</x>
-      <y>110</y>
-      <width>51</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>110</y>
-      <width>55</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>ax/ay</string>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="box_ay">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>110</y>
-      <width>51</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_change_a_b">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>170</y>
-      <width>151</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Change a/b</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>140</y>
-      <width>55</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>bx/by</string>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="box_by">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>140</y>
-      <width>51</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="box_bx">
-    <property name="geometry">
-     <rect>
-      <x>740</x>
-      <y>140</y>
-      <width>51</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_calcul_Tot">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>430</y>
-      <width>151</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Calcul Total</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_tri">
-    <property name="geometry">
-     <rect>
-      <x>710</x>
-      <y>640</y>
-      <width>80</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Tri</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_saveimg">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>590</y>
-      <width>151</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Save image</string>
-    </property>
    </widget>
   </widget>
   <action name="actionSubmenu">

@@ -18,7 +18,18 @@ public:
     void changeNxNy(vec2 n);
     void changeAB(vec2 a, vec2 b);
     std::vector<vec3> tri();
+    void ecoulement();
+    void majVoisinEcoulement(vec3 pos);
+    double slope(int i, int j);
+    void calculSlope();
+    void calculWetness(float param);
+
+    ScalarField slopeField;
+    ScalarField drainageField;
+    ScalarField wetnessField;
+    ScalarField luxField;
 private:
+
 
 };
 

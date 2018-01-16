@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->openGLWidget->lf = &lf;
     ui->ck_br->setChecked(true);
+    ui->ck_simple->setChecked(true);
     connect(ui->pushButtonLoadImage, SIGNAL (released()), this, SLOT (loadImage()));
     connect(ui->pushButtonSaveHFtoObj, SIGNAL (released()), this, SLOT (saveHFtoObj()));
     connect(ui->btn_change_nx_ny, SIGNAL (released()), this, SLOT (changeNxNy()));
@@ -23,11 +24,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->ck_montagne, SIGNAL (released()), this, SLOT (affiche()));
     connect(ui->ck_total, SIGNAL (released()), this, SLOT (affiche()));
     connect(ui->btn_calcul_Tot, SIGNAL (released()), this, SLOT (calculTot()));
-    connect(ui->btn_tri, SIGNAL (released()), this, SLOT (tri()));
     connect(ui->btn_saveimg, SIGNAL (released()), this, SLOT (saveHFtojpg()));
     connect(ui->btn_showImg, SIGNAL (released()), this, SLOT (afficheImage()));
-
-
 
 
 
@@ -71,8 +69,18 @@ void MainWindow::afficheImage(){
         img = lf.montagne.getImage();
     if (ui->ck_sable->isChecked())
         img = lf.sable.getImage();
-    if (ui->ck_total->isChecked())
-        img = lf.getImage();
+    if (ui->ck_total->isChecked()){
+        if (ui->ck_simple->isChecked())
+            img = lf.getImage();
+        if (ui->ck_drainage->isChecked())
+            img = lf.drainageField.getImage();
+        if (ui->ck_humidite->isChecked())
+            img = lf.wetnessField.getImage();
+        if (ui->ck_lumiere->isChecked())
+            img = lf.luxField.getImage();
+        if (ui->ck_slope->isChecked())
+            img = lf.slopeField.getImage();
+    }
 
     QPixmap qpix = QPixmap::fromImage(img);
     QSize labelSize = ui->labelImage->size();
@@ -80,44 +88,15 @@ void MainWindow::afficheImage(){
     ui->labelImage->setPixmap(qpix);
     ui->labelImage->adjustSize();
     ui->labelImage->setScaledContents(true);
-
-
-
-
 }
 
-void MainWindow::tri(){
-    ScalarField riviere = lf.br.ecoulement();
-   /* QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
-                                                  "",
-                                                  tr("Images (*.bmp);;Images (*.jpg);;Images (*.png);;Images (*.ppm);;Images (*.tif);;Images (*.xbm);;Images (*.xpm)"));
-    */
-    QImage img = riviere.getImage();
-    QPixmap qpix = QPixmap::fromImage(img);
-    QSize labelSize = ui->labelImage->size();
-    qpix = qpix.scaled(labelSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
-    ui->labelImage->setPixmap(qpix);
-    ui->labelImage->adjustSize();
-    ui->labelImage->setScaledContents(true);
-
-
-
-    std::cout<<"debut"<<std::endl;
-    bool res = false;
-    //riviere. TOTO : ici trouver moyen de sauvegarder
-    std::cout<<"fin"<<std::endl;
-
-
-
-
-    if (res)
-        QMessageBox::information(this, "OK", "Fichier sauvegardée");
-    else
-        QMessageBox::critical(this, "Erreur", "Erreur lors de l'enregistrement");
-}
 
 void MainWindow::calculTot(){
     lf.heightTotal();
+    lf.calculSlope();
+    lf.ecoulement();
+    lf.calculWetness(ui->humiditeFactor->value());
+    ui->groupBox_2->setEnabled(true);
     ui->openGLWidget->paintGL();
     ui->openGLWidget->updateGL();
 }
@@ -206,8 +185,18 @@ void MainWindow::saveHFtojpg(){
         res = lf.montagne.saveImg(fileName);
     if (ui->ck_sable->isChecked())
         res = lf.sable.saveImg(fileName);
-    if (ui->ck_total->isChecked())
-        res = lf.saveImg(fileName);
+    if (ui->ck_total->isChecked()){
+        if (ui->ck_simple->isChecked())
+            res = lf.saveImg(fileName);
+        if (ui->ck_drainage->isChecked())
+            res = lf.drainageField.saveImg(fileName);
+        if (ui->ck_humidite->isChecked())
+            res = lf.wetnessField.saveImg(fileName);
+        if (ui->ck_lumiere->isChecked())
+            res = lf.luxField.saveImg(fileName);
+        if (ui->ck_slope->isChecked())
+            res = lf.slopeField.saveImg(fileName);
+    }
     std::cout<<"fin"<<std::endl;
 
 

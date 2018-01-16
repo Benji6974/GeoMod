@@ -17,6 +17,7 @@ class ScalarField: public Array2
 public:
     ScalarField();
     ScalarField(int nx, int ny, vec2 a, vec2 b);
+    void setAllZ(double val);
     int index(int i,int j);
     vec3 P(int i,int j);
     bool inside(int x,int y,int z);
@@ -28,15 +29,14 @@ public:
     QImage getImage();
     std::vector<vec3> tri();
     float pente(vec2 source, vec2 destination);
-    void majVoisinEcoulement(vec3 pos, ScalarField sf);
-    ScalarField ecoulement();
     vec2 calculMinMax();
     bool saveImg(QString s);
     void changeSizeZ();
 
     vec2 Gradiant(int i, int j);
     vec2 longueurE();
-
+    void setZ(int i,int j,double val);
+    double getZ(int i,int j);
 
 
 

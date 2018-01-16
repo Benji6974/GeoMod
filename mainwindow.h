@@ -8,9 +8,9 @@
 #include <QCoreApplication>
 #include <QGraphicsTextItem>
 #include <QFont>
- #include <QFileDialog>
- #include <QTextStream>
- #include <QFile>
+#include <QFileDialog>
+#include <QTextStream>
+#include <QFile>
 #include <QCheckBox>
 #include <QMessageBox>
 
@@ -37,7 +37,6 @@ private slots:
     void affiche();
     void changeAB();
     void calculTot();
-    void tri();
     void saveHFtojpg();
     void afficheImage();
 };
