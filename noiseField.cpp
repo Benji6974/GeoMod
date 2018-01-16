@@ -1,45 +1,31 @@
 #include "noiseField.h"
 
-
+using namespace std;
 
 NoiseField::NoiseField(int nx, int ny, vec2 a, vec2 b): ScalarField(nx,ny,a,b)
 {
+    addParam(Param(1,1));
 }
 
 double NoiseField::H(vec2 p)
 {
-    return testNoiseFunction(p.x,p.y,a,b);
+    return sumPerlinNoise(p.x,p.y);
 }
 
-void NoiseField::setAmplitude(double a[10])
+void NoiseField::setParam(vector<Param> parameters)
 {
-    for(int i=0 ; i < 10 ; i++)
-    {
-        this->amplitude[i] = a[i];
-    }
+    this->parameters = parameters;
 }
 
-void NoiseField::setAmplitude(int index, double a)
+void NoiseField::setParam(unsigned int index, Param p)
 {
-    this->amplitude[index] = a;
+    if(index < this->parameters.size())
+        this->parameters[index] = p;
 }
 
-void NoiseField::setLambda(double l[10])
+void NoiseField::addParam(Param p)
 {
-    for(int i=0 ; i < 10 ; i++)
-    {
-        this->lambda[i] = l[i];
-    }
-}
-
-void NoiseField::setLambda(int index, double l)
-{
-    this->lambda[index] = l;
-}
-
-double NoiseField::testNoiseFunction(float x,float y,vec2 a, vec2 b)
-{
-    return cos(x) + sin(y);
+    parameters.push_back(p);
 }
 
 void NoiseField::generate()
@@ -48,7 +34,7 @@ void NoiseField::generate()
     {
         for(int j = 0 ; j < ny ; j++)
         {
-            std::cout << "i= " << i << " j=" << j << std::endl;
+            //cout << "i= " << i << " j=" << j << endl;
             z[index(i,j)] = H(Vertex(i,j));
 
         }
@@ -56,26 +42,58 @@ void NoiseField::generate()
     }
 }
 
-
-double NoiseField::perlinNoise(int octaves, double frequency,
-        double persistence, double x)
+double rand_noise(int t)
 {
-    /*
-    double r = 0.;
-    double f = frequency;
-    double amplitude = 1.;
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    std::uniform_real_distribution<double> distribution(0.0,255.0);
 
-    for(int i = 0; i < octaves; i++)
+    return distribution(mt);
+}
+
+
+double linear_interpolate(double a, double b, double t)
+{
+    return (1. - t) * a + t * b;
+}
+
+double smooth_noise(double x,double y)
+{
+    //Partie entière : E(x)
+    int integer_x = (int)x;
+    int integer_y = (int)x;
+    //Partie fractionnaire : x - E(x)
+    double fractional_x = x - integer_x;
+    double fractional_y = y - integer_y;
+
+
+    //Bruit du point précédent :
+    double a = rand_noise(integer_x);
+    //Bruit du point suivant :
+    double b = rand_noise(integer_x + 1);
+
+    //Bruit du point précédent :
+    double c = rand_noise(integer_y);
+    //Bruit du point suivant :
+    double d = rand_noise(integer_y + 1);
+
+    //Interpolation :
+
+    double f = linear_interpolate(a, b, fractional_x);
+    double g = linear_interpolate(c, d, fractional_x);
+
+    return linear_interpolate(f, g, fractional_y);
+}
+
+double NoiseField::sumPerlinNoise(double x, double y)
+{
+
+    double value = 0;
+    for(unsigned int i = 0 ; i < parameters.size() ; i++)
     {
-        r += smooth_noise(x * f) * amplitude;
-        amplitude *= persistence;
-        f *= 2;
+        value += parameters[i].amplitude * smooth_noise(x/parameters[i].lambda,y/parameters[i].lambda);
     }
-
-    double geo_lim = (1 - persistence) / (1 - amplitude);
-
-    return r * geo_lim;
-    */
+    return value;
 }
 
 
