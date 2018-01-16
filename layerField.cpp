@@ -164,8 +164,7 @@ void LayerField::calculWetness(float param){
     wetnessField.setAllZ(0);
     for(int x = 1 ; x < this->nx-1 ; x++){
         for(int y = 1 ; y < this->ny-1 ; y++){
-            if (slopeField.getZ(x,y) != 0)
-                wetnessField.setZ(x,y, log(drainageField.getZ(x,y)/(param*slopeField.getZ(x,y))));
+                wetnessField.setZ(x,y, log(drainageField.getZ(x,y)/(param+slopeField.getZ(x,y))));
         }
     }
 }
