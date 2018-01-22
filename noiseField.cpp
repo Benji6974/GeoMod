@@ -2,9 +2,13 @@
 
 using namespace std;
 
+NoiseField::NoiseField(): ScalarField()
+{}
+
 NoiseField::NoiseField(int nx, int ny, vec2 a, vec2 b): ScalarField(nx,ny,a,b)
 {
-    addParam(Param(1,1));
+    this->seed = 123;
+    reseed(seed);
 }
 
 double NoiseField::H(vec2 p)
@@ -12,24 +16,14 @@ double NoiseField::H(vec2 p)
     return sumPerlinNoise(p.x,p.y);
 }
 
-void NoiseField::setParam(vector<Param> parameters)
+void NoiseField::generate(int s)
 {
-    this->parameters = parameters;
-}
+    if(s != seed)
+    {
+        reseed(seed);
+        seed = s;
+    }
 
-void NoiseField::setParam(unsigned int index, Param p)
-{
-    if(index < this->parameters.size())
-        this->parameters[index] = p;
-}
-
-void NoiseField::addParam(Param p)
-{
-    parameters.push_back(p);
-}
-
-void NoiseField::generate()
-{
     for(int i = 0 ; i < nx ; i++)
     {
         for(int j = 0 ; j < ny ; j++)
@@ -42,58 +36,80 @@ void NoiseField::generate()
     }
 }
 
-double rand_noise(int t)
+static double Fade(double t)
 {
-    std::random_device rd;
-    std::mt19937 mt(rd());
-    std::uniform_real_distribution<double> distribution(0.0,255.0);
-
-    return distribution(mt);
+    return t * t * t * (t * (t * 6 - 15) + 10);
 }
 
-
-double linear_interpolate(double a, double b, double t)
+static double Lerp(double t, double a, double b)
 {
-    return (1. - t) * a + t * b;
+    return a + t * (b - a);
 }
 
-double smooth_noise(double x,double y)
+static double Grad(std::int32_t hash, double x, double y, double z)
 {
-    //Partie entière : E(x)
-    int integer_x = (int)x;
-    int integer_y = (int)x;
-    //Partie fractionnaire : x - E(x)
-    double fractional_x = x - integer_x;
-    double fractional_y = y - integer_y;
+    const std::int32_t h = hash & 15;
+    const double u = h < 8 ? x : y;
+    const double v = h < 4 ? y : h == 12 || h == 14 ? x : z;
+    return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
+}
 
+void NoiseField::reseed(std::uint32_t seed)
+{
+    for (size_t i = 0; i < 256; i++)
+    {
+        p[i] = i;
+    }
 
-    //Bruit du point précédent :
-    double a = rand_noise(integer_x);
-    //Bruit du point suivant :
-    double b = rand_noise(integer_x + 1);
+    std::shuffle(std::begin(p), std::begin(p) + 256, std::default_random_engine(seed));
 
-    //Bruit du point précédent :
-    double c = rand_noise(integer_y);
-    //Bruit du point suivant :
-    double d = rand_noise(integer_y + 1);
+    for (size_t i = 0; i < 256; i++)
+    {
+        p[256 + i] = p[i];
+    }
+}
 
-    //Interpolation :
+double NoiseField::noise(double x, double y, double z)
+{
+    const std::int32_t X = static_cast<std::int32_t>(std::floor(x)) & 255;
+    const std::int32_t Y = static_cast<std::int32_t>(std::floor(y)) & 255;
+    const std::int32_t Z = static_cast<std::int32_t>(std::floor(z)) & 255;
 
-    double f = linear_interpolate(a, b, fractional_x);
-    double g = linear_interpolate(c, d, fractional_x);
+    x -= std::floor(x);
+    y -= std::floor(y);
+    z -= std::floor(z);
 
-    return linear_interpolate(f, g, fractional_y);
+    const double u = Fade(x);
+    const double v = Fade(y);
+    const double w = Fade(z);
+
+    const std::int32_t A = p[X] + Y, AA = p[A] + Z, AB = p[A + 1] + Z;
+    const std::int32_t B = p[X + 1] + Y, BA = p[B] + Z, BB = p[B + 1] + Z;
+
+    return Lerp(w, Lerp(v, Lerp(u, Grad(p[AA], x, y, z),
+        Grad(p[BA], x - 1, y, z)),
+        Lerp(u, Grad(p[AB], x, y - 1, z),
+        Grad(p[BB], x - 1, y - 1, z))),
+        Lerp(v, Lerp(u, Grad(p[AA + 1], x, y, z - 1),
+        Grad(p[BA + 1], x - 1, y, z - 1)),
+        Lerp(u, Grad(p[AB + 1], x, y - 1, z - 1),
+        Grad(p[BB + 1], x - 1, y - 1, z - 1))));
 }
 
 double NoiseField::sumPerlinNoise(double x, double y)
 {
+    double sum = 0;
+    double freq = parameters.frequence;
+    double amp = parameters.amplitude;
 
-    double value = 0;
-    for(unsigned int i = 0 ; i < parameters.size() ; i++)
-    {
-        value += parameters[i].amplitude * smooth_noise(x/parameters[i].lambda,y/parameters[i].lambda);
+    for (int i = 0 ; i < parameters.octaves ; i++) {
+        sum += noise(x*freq, y*freq,0.0)*amp;
+
+        freq *= parameters.lacunarity;
+        amp *= parameters.persistance;
     }
-    return value;
+
+    return sum;
 }
 
 

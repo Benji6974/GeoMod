@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <QPushButton>
 #include "layerField.h"
+#include "noiseField.h"
 #include <QCoreApplication>
 #include <QGraphicsTextItem>
 #include <QFont>
@@ -29,6 +30,7 @@ private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
     LayerField lf;
+    NoiseField nf;
 
 private slots:
     void loadImage();
@@ -39,6 +41,7 @@ private slots:
     void calculTot();
     void saveHFtojpg();
     void afficheImage();
+    void afficheImageNoise();
 };
 
 #endif // MAINWINDOW_H

@@ -10,8 +10,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
-
     ui->openGLWidget->lf = &lf;
     ui->ck_br->setChecked(true);
     ui->ck_simple->setChecked(true);
@@ -26,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->btn_calcul_Tot, SIGNAL (released()), this, SLOT (calculTot()));
     connect(ui->btn_saveimg, SIGNAL (released()), this, SLOT (saveHFtojpg()));
     connect(ui->btn_showImg, SIGNAL (released()), this, SLOT (afficheImage()));
+    connect(ui->btn_showImageNoise, SIGNAL (released()), this, SLOT (afficheImageNoise()));
 
 
 
@@ -56,6 +55,8 @@ MainWindow::MainWindow(QWidget *parent) :
      ui->box_bx->setValue(b.x);
      ui->box_by->setValue(b.y);
 
+     nf = NoiseField(n.x,n.y,a,b);
+
     ui->openGLWidget->aff = "br";
 }
 
@@ -81,6 +82,30 @@ void MainWindow::afficheImage(){
         if (ui->ck_slope->isChecked())
             img = lf.slopeField.getImage();
     }
+
+    QPixmap qpix = QPixmap::fromImage(img);
+    QSize labelSize = ui->labelImage->size();
+    qpix = qpix.scaled(labelSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
+    ui->labelImage->setPixmap(qpix);
+    ui->labelImage->adjustSize();
+    ui->labelImage->setScaledContents(true);
+}
+
+void MainWindow::afficheImageNoise(){
+
+    std::cout << "generateNoise" << std::endl;
+    nf.parameters.setOctaves(ui->spinBoxOctaves->value());
+    nf.parameters.setAmplitude(ui->doubleSpinBoxAmplitude->value());
+    nf.parameters.setFrequence(ui->doubleSpinBoxFrequence->value());
+    nf.parameters.setLacunarity(ui->doubleSpinBoxLacunarite->value());
+    nf.parameters.setPersistance(ui->doubleSpinBoxPersistance->value());
+
+    nf.generate(ui->spinBoxSeed->value());
+
+    std::cout << "EndgenerateNoise" << std::endl;
+
+    QImage img;
+    img = nf.getImage();
 
     QPixmap qpix = QPixmap::fromImage(img);
     QSize labelSize = ui->labelImage->size();

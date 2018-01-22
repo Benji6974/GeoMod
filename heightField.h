@@ -5,6 +5,8 @@
 
 #include "scalarField.h"
 
+#include <cmath>
+
 
 class HeightField : public ScalarField
 {
