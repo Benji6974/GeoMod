@@ -42,6 +42,8 @@ private slots:
     void saveHFtojpg();
     void afficheImage();
     void afficheImageNoise();
+    void upScale();
+    void downScale();
 };
 
 #endif // MAINWINDOW_H

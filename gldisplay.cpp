@@ -6,7 +6,8 @@ GLDisplay::GLDisplay(QWidget *parent) :
     _angleY(0.0f),
     _deplacementX(0.0f),
     _deplacementY(0.0f),
-    aff("")
+    aff(""),
+    _scale(1.0)
 {
 }
 
@@ -23,7 +24,7 @@ void GLDisplay::paintGL()
 
     glLoadIdentity();
 
-
+    glScalef(_scale,_scale,_scale);
     glTranslatef(_deplacementX,_deplacementY,0.f);
     glRotatef(_angleX, 0.0f, 1.0f, 0.0f);
     glRotatef(_angleY, 1.0f, 0.0f, 0.0f);
@@ -37,7 +38,7 @@ void GLDisplay::resizeGL(int w, int h)
 
     glViewport(0, 0, w, h);
 
-    glOrtho(-10.5f, 10.5f, -10.5f, 10.5f, -10.5f, 10.5f);
+    glOrtho(-10.5f, 10.5f, -10.5f, 10.5f, -10.5f, 100.5f);
     //glOrtho(0.0f, w, h, 0.0f, 0.0f, 1.0f);
 
     glMatrixMode(GL_MODELVIEW);

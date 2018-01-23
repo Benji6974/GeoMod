@@ -20,6 +20,7 @@ public:
     virtual void resizeGL(int w, int h);
     LayerField *lf;
     std::string aff;
+    float _scale;
 protected:
     virtual void mouseMoveEvent ( QMouseEvent * event );
     virtual void mousePressEvent ( QMouseEvent * event );

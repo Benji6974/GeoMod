@@ -25,6 +25,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->btn_saveimg, SIGNAL (released()), this, SLOT (saveHFtojpg()));
     connect(ui->btn_showImg, SIGNAL (released()), this, SLOT (afficheImage()));
     connect(ui->btn_showImageNoise, SIGNAL (released()), this, SLOT (afficheImageNoise()));
+    connect(ui->btn_moins, SIGNAL (released()), this, SLOT (downScale()));
+    connect(ui->btn_plus, SIGNAL (released()), this, SLOT (upScale()));
 
 
 
@@ -58,6 +60,16 @@ MainWindow::MainWindow(QWidget *parent) :
      nf = NoiseField(n.x,n.y,a,b);
 
     ui->openGLWidget->aff = "br";
+}
+
+void MainWindow::upScale(){
+    ui->openGLWidget->_scale = ui->openGLWidget->_scale*1.05;
+    ui->openGLWidget->update();
+}
+
+void MainWindow::downScale(){
+    ui->openGLWidget->_scale = ui->openGLWidget->_scale/1.05;
+    ui->openGLWidget->update();
 }
 
 void MainWindow::afficheImage(){
