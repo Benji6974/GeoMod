@@ -58,16 +58,16 @@ public:
     NoiseField();
     NoiseField(int nx, int ny, vec2 a, vec2 b);
     double H(vec2 p);
-    double sumPerlinNoise(double x, double y);
+    double sumPerlinNoise(vec2 point);
     void generate(int seed);
 
     Param parameters;
 private:
-    double noise(double x, double y, double z);
-    void reseed(std::uint32_t seed);
+    double noise(vec2 point);
 
     int seed;
-    std::int32_t p[512];
+    static int hash[256];
+    static vec2 gradients2D[4];
 };
 
 #endif // NOISEFIELD_H

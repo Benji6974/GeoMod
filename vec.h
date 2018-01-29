@@ -95,6 +95,12 @@ struct vec2
     //! constructeur par defaut.
     vec2( const float _x= 0, const float _y= 0 ) : x(_x), y(_y) {}
     float x, y;
+
+    void operator*=(const float f )
+    {
+        x = x * f;
+        y = y * f;
+    }
 };
 
 vec2 operator+ ( const vec2& u, const vec2& v );

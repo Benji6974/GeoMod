@@ -105,6 +105,11 @@ vec2 operator/ ( const vec2& u, const vec2& v )
     return vec2(u.x / v.x, u.y / v.y);
 }
 
+vec2 operator* ( const vec2& u, const float f )
+{
+    return vec2(u.x * f, u.y * f);
+}
+
 float dot( const Vector& u, const Vector& v )
 {
     return u.x * v.x + u.y * v.y + u.z * v.z;
