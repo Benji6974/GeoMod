@@ -66,8 +66,10 @@ private:
     double noise(vec2 point);
 
     int seed;
-    static int hash[256];
-    static vec2 gradients2D[4];
+    static int hash[512];
+    static int hashMask;
+    static vec2 gradients2D[8];
+    static int gradientsMask2D;
 };
 
 #endif // NOISEFIELD_H

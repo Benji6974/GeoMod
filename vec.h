@@ -106,6 +106,14 @@ struct vec2
 vec2 operator+ ( const vec2& u, const vec2& v );
 vec2 operator- ( const vec2& u, const vec2& v );
 vec2 operator/ ( const vec2& u, const vec2& v );
+vec2 operator* ( const vec2& u, const float f );
+
+float length( const vec2& v );
+
+float length2( const vec2& v );
+
+
+vec2 normalize( const vec2& v );
 
 
 //! vecteur generique, utilitaire.

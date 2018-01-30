@@ -90,6 +90,23 @@ Vector cross( const Vector& u, const Vector& v )
         (u.x * v.y) - (u.y * v.x));
 }
 
+float length( const vec2& v )
+{
+    return sqrt(length2(v));
+}
+
+float length2( const vec2& v )
+{
+    return v.x * v.x + v.y * v.y;
+}
+
+
+vec2 normalize( const vec2& v )
+{
+    float kk= 1 / length(v);
+    return v * kk;
+}
+
 vec2 operator+ ( const vec2& u, const vec2& v )
 {
     return vec2(u.x + v.x,u.y + v.y);
