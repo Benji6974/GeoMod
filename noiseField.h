@@ -11,11 +11,11 @@
 
 typedef struct Param
 {
-    Param() : octaves(1), frequence(1), amplitude(1),
-        lacunarity(2), persistance(0.5)
+    Param() : octaves(1), frequence(1.f), amplitude(1.f),
+        lacunarity(2.f), persistance(0.5f)
     {}
 
-    Param(int oct, double freq, double a, double lac, double pers) : octaves(oct), frequence(freq), amplitude(a),
+    Param(int oct, float freq, float a, float lac, float pers) : octaves(oct), frequence(freq), amplitude(a),
         lacunarity(lac), persistance(pers)
     {}
 
@@ -25,31 +25,31 @@ typedef struct Param
             this->octaves = oct;
     }
 
-    void setFrequence(double freq)
+    void setFrequence(float freq)
     {
         this->frequence = freq;
     }
 
-    void setAmplitude(double a)
+    void setAmplitude(float a)
     {
         this->amplitude = a;
     }
 
-    void setLacunarity(double lac)
+    void setLacunarity(float lac)
     {
         this->lacunarity = lac;
     }
 
-    void setPersistance(double pers)
+    void setPersistance(float pers)
     {
         this->persistance = pers;
     }
 
     int octaves;
-    double frequence;
-    double amplitude;
-    double lacunarity;
-    double persistance;
+    float frequence;
+    float amplitude;
+    float lacunarity;
+    float persistance;
 } Param;
 
 class NoiseField: public ScalarField
@@ -57,19 +57,19 @@ class NoiseField: public ScalarField
 public:
     NoiseField();
     NoiseField(int nx, int ny, vec2 a, vec2 b);
-    double H(vec2 p);
-    double sumPerlinNoise(vec2 point);
+    float sumPerlinNoise(vec2 point);
     void generate(int seed);
 
     Param parameters;
 private:
-    double noise(vec2 point);
+    float noise(vec2 point);
 
     int seed;
     static int hash[512];
     static int hashMask;
     static vec2 gradients2D[8];
     static int gradientsMask2D;
+    static float sqrt2;
 };
 
 #endif // NOISEFIELD_H

@@ -57,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent) :
      ui->box_bx->setValue(b.x);
      ui->box_by->setValue(b.y);
 
-     nf = NoiseField(n.x,n.y,vec2(0,0),vec2(10,10));
+     nf = NoiseField(n.x,n.y,vec2(0,0),vec2(1,1));
 
     ui->openGLWidget->aff = "br";
 }
@@ -156,6 +156,8 @@ void MainWindow::affiche(){
 
 void MainWindow::changeNxNy(){
     lf.changeNxNy(vec2(ui->box_nx->value(),ui->box_ny->value()));
+    nf.setNxNy(vec2(vec2(ui->box_nx->value(),ui->box_ny->value())));
+    nf.changeSizeZ();
 }
 
 void MainWindow::changeAB(){
