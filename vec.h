@@ -89,6 +89,7 @@ Vector operator* ( const Vector& v, const float k );
 Vector operator/ ( const Vector& v, const float k );
 
 
+
 //! vecteur generique, utilitaire.
 struct vec2
 {
@@ -107,6 +108,9 @@ vec2 operator+ ( const vec2& u, const vec2& v );
 vec2 operator- ( const vec2& u, const vec2& v );
 vec2 operator/ ( const vec2& u, const vec2& v );
 vec2 operator* ( const vec2& u, const float f );
+vec3 operator* ( const vec3& u, const float f );
+vec3 operator- ( const vec3& u, const vec3& v );
+vec3 operator+ ( const vec3& u, const vec3& v );
 
 float length( const vec2& v );
 

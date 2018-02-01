@@ -12,6 +12,7 @@ Array2::Array2(int nx, int ny, vec2 a, vec2 b): Box2(a,b){
     this->ny = ny;
 }
 
+
 vec2 Array2::getNxNy(){
     return vec2(this->nx,this->ny);
 }

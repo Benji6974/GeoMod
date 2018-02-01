@@ -24,7 +24,7 @@ void ScalarField::setAllZ(double val){
 }
 
 void ScalarField::changeSizeZ(){
-    z = QVector<double>(getNxNy().x*getNxNy().y);
+    z.resize(getNxNy().x*getNxNy().y);
 }
 
 int ScalarField::index(int i,int j){
@@ -260,5 +260,7 @@ void ScalarField::setZ(int i,int j, double val){
 double ScalarField::getZ(int i,int j){
     return z[index(i,j)];
 }
+
+
 
 

@@ -23,6 +23,7 @@ public:
     double slope(int i, int j);
     void calculSlope();
     void calculWetness(float param);
+    void calculLumiere(int nbSrcLum, int nbPas);
 
     ScalarField slopeField;
     ScalarField drainageField;

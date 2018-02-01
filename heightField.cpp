@@ -59,13 +59,16 @@ bool HeightField::save(QString pathFile){
 
 void HeightField::affiche(){
 
-
    for (int x=0; x<nx-1; x++ ){
        for (int y=0; y<ny-1; y++ ){
+
+
            float c1 = z[index(x,y)];
            float c2 = z[index(x,y+1)];
            float c3 = z[index(x+1,y+1)];
            float c4 = z[index(x+1,y)];
+
+
 
             c1 = c1/50;
             c2 = c2/50;
@@ -255,6 +258,15 @@ vec3 HeightField::normal(vec2 s1){
 
 std::vector<vec3> HeightField::tri(){
     return ScalarField::tri();
+}
+
+bool HeightField::underTerrain(vec3 & vec){
+    double height;
+    if(vec.x >= a.x && vec.x <= b.x && vec.y >= a.y && vec.y <= b.y) {
+
+        return vec.z < getZ(vec.x, vec.y);
+    }
+    return false;
 }
 
 

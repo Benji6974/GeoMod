@@ -127,6 +127,21 @@ vec2 operator* ( const vec2& u, const float f )
     return vec2(u.x * f, u.y * f);
 }
 
+vec3 operator+ ( const vec3& u, const vec3& v )
+{
+    return vec3(u.x + v.x,u.y + v.y,u.z + v.z);
+}
+
+vec3 operator* ( const vec3& u, const float f )
+{
+    return vec3(u.x * f, u.y * f,u.z * f);
+}
+
+vec3 operator- ( const vec3& u, const vec3& v )
+{
+    return vec3(u.x - v.x,u.y - v.y,u.z - v.z);
+}
+
 float dot( const Vector& u, const Vector& v )
 {
     return u.x * v.x + u.y * v.y + u.z * v.z;

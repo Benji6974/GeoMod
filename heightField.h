@@ -19,7 +19,7 @@ public:
     vec3 normal(vec2 s1);
     Vector normalTriangle(vec3 s1, vec3 s2, vec3 s3);
     std::vector<vec3> tri();
-
+    bool underTerrain(vec3 & vec);
     // ajouter ici les fonctions de hauteur
 };
 

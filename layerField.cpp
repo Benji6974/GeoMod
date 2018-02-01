@@ -59,23 +59,31 @@ void LayerField::heightTotal(){
 
 void LayerField::changeNxNy(vec2 n){
     this->setNxNy(n);
+        changeSizeZ();
     for (unsigned int i=0; i<vec_HF.size(); i++){
        vec_HF[i]->setNxNy(n);
+       vec_HF[i]->changeSizeZ();
     }
     slopeField.setNxNy(n);
     wetnessField.setNxNy(n);
     luxField.setNxNy(n);
     drainageField.setNxNy(n);
+
+
+    slopeField.changeSizeZ();
+    wetnessField.changeSizeZ();
+    luxField.changeSizeZ();
+    drainageField.changeSizeZ();
 }
 
 void LayerField::changeAB(vec2 a, vec2 b){
     this->setA(a);
     this->setB(b);
-    changeSizeZ();
+
     for (unsigned int i=0; i<vec_HF.size(); i++){
        vec_HF[i]->setA(a);
        vec_HF[i]->setB(b);
-       vec_HF[i]->changeSizeZ();
+
     }
     slopeField.setA(a);
     wetnessField.setA(a);
@@ -168,5 +176,67 @@ void LayerField::calculWetness(float param){
         }
     }
 }
+
+void LayerField::calculLumiere(int nbSrcLum, int nbPas){
+    luxField.setAllZ(0);
+
+    // Génération de nos sources de lumières
+    //vec2 centre = getCenter();
+    //VAR_TYPE radius = distance(centre, a) + distance(centre, a)/10;
+    vec3 center = vec3(b.x/2,b.y/2, 0.0);
+    float radius = (a.x/2)*1.01;
+
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::mt19937 generator(seed);
+    std::uniform_real_distribution<double> uniform(0.0, 1.0);
+
+    std::vector<vec3> listPoints(nbSrcLum);
+    std::cout<< "coucou"<<endl;
+    for(int i = 0; i < nbSrcLum; ++i) {
+        double theta = 2 * M_PI * uniform(generator);
+        double phi = acos(1 - 2 * uniform(generator));
+
+        double x = center.x + radius * sin(phi) * cos(theta);
+        double y = center.y + radius * sin(phi) * sin(theta);
+        double z = center.z + radius * cos(phi);
+
+        vec3 point(x, y, z);
+
+        // Si point dans l'hemisphere inférieur, on inverse z
+        if(point.z < 0) {
+            point.z = -point.z;
+        }
+
+        listPoints[i] = point;
+    }
+
+
+    // Lancer de rayons
+    for (int i = 0; i < this->nx; i++) {
+        for (int j = 0; j < this->ny; j++) {
+            vec3 depart(P(i,j));
+
+            for(unsigned int p = 0; p < listPoints.size(); ++p) {
+                vec3 rayon = listPoints[p] - depart;
+                bool visible = true;
+
+                // On ne parcourt que la 1ère moitié du rayon
+                for(float k = 1; k <= nbPas/2; ++k) {
+                    vec3 rayPos = depart + (rayon * (k/nbPas));
+                    if(underTerrain(rayPos)) {
+                        visible = false;
+                        break;
+                    }
+                }
+
+                if(visible){
+                    luxField.setZ(i, j,luxField.getZ(i,j)+1);
+                }
+            }
+        }
+    }
+
+}
+
 
 

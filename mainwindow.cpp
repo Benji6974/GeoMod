@@ -149,6 +149,8 @@ void MainWindow::calculTot(){
     lf.calculSlope();
     lf.ecoulement();
     lf.calculWetness(ui->humiditeFactor->value());
+    lf.calculLumiere(ui->nb_points->value(), ui->pas->value());
+
     ui->groupBox_2->setEnabled(true);
     ui->openGLWidget->paintGL();
     ui->openGLWidget->updateGL();
