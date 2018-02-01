@@ -510,8 +510,8 @@
      <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>20</y>
+        <x>10</x>
+        <y>70</y>
         <width>71</width>
         <height>21</height>
        </rect>
@@ -523,8 +523,8 @@
      <widget class="QLabel" name="label_6">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>60</y>
+        <x>10</x>
+        <y>110</y>
         <width>81</width>
         <height>21</height>
        </rect>
@@ -536,8 +536,8 @@
      <widget class="QLabel" name="label_7">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>90</y>
+        <x>10</x>
+        <y>140</y>
         <width>81</width>
         <height>21</height>
        </rect>
@@ -549,8 +549,8 @@
      <widget class="QLabel" name="label_8">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>120</y>
+        <x>10</x>
+        <y>170</y>
         <width>81</width>
         <height>21</height>
        </rect>
@@ -559,37 +559,37 @@
        <string>Lacunarite</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btn_calcul_Tot_2">
+     <widget class="QPushButton" name="btn_save_noise">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>190</y>
+        <x>10</x>
+        <y>280</y>
         <width>151</width>
         <height>31</height>
        </rect>
       </property>
       <property name="text">
-       <string>Ajouter au Layer</string>
+       <string>Sauvegarder image</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btn_showImageNoise">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>230</y>
+        <x>10</x>
+        <y>240</y>
         <width>151</width>
         <height>31</height>
        </rect>
       </property>
       <property name="text">
-       <string>Afficher image</string>
+       <string>Generer terrain</string>
       </property>
      </widget>
      <widget class="QSpinBox" name="spinBoxOctaves">
       <property name="geometry">
        <rect>
-        <x>110</x>
-        <y>20</y>
+        <x>100</x>
+        <y>70</y>
         <width>71</width>
         <height>24</height>
        </rect>
@@ -604,8 +604,8 @@
      <widget class="QDoubleSpinBox" name="doubleSpinBoxFrequence">
       <property name="geometry">
        <rect>
-        <x>110</x>
-        <y>60</y>
+        <x>100</x>
+        <y>110</y>
         <width>69</width>
         <height>24</height>
        </rect>
@@ -620,8 +620,8 @@
      <widget class="QDoubleSpinBox" name="doubleSpinBoxAmplitude">
       <property name="geometry">
        <rect>
-        <x>110</x>
-        <y>90</y>
+        <x>100</x>
+        <y>140</y>
         <width>69</width>
         <height>24</height>
        </rect>
@@ -636,8 +636,8 @@
      <widget class="QDoubleSpinBox" name="doubleSpinBoxLacunarite">
       <property name="geometry">
        <rect>
-        <x>110</x>
-        <y>120</y>
+        <x>100</x>
+        <y>170</y>
         <width>69</width>
         <height>24</height>
        </rect>
@@ -655,8 +655,8 @@
      <widget class="QDoubleSpinBox" name="doubleSpinBoxPersistance">
       <property name="geometry">
        <rect>
-        <x>110</x>
-        <y>150</y>
+        <x>100</x>
+        <y>200</y>
         <width>69</width>
         <height>24</height>
        </rect>
@@ -674,8 +674,8 @@
      <widget class="QLabel" name="label_10">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>150</y>
+        <x>10</x>
+        <y>200</y>
         <width>81</width>
         <height>21</height>
        </rect>
@@ -687,8 +687,8 @@
      <widget class="QLabel" name="label_11">
       <property name="geometry">
        <rect>
-        <x>210</x>
-        <y>20</y>
+        <x>200</x>
+        <y>70</y>
         <width>71</width>
         <height>21</height>
        </rect>
@@ -700,8 +700,8 @@
      <widget class="QSpinBox" name="spinBoxSeed">
       <property name="geometry">
        <rect>
-        <x>210</x>
-        <y>60</y>
+        <x>200</x>
+        <y>100</y>
         <width>81</width>
         <height>24</height>
        </rect>
@@ -711,6 +711,83 @@
       </property>
       <property name="value">
        <number>123</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Offset</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="doubleSpinBoxOffsetX">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>30</y>
+        <width>69</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <double>-1000.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>1000.000000000000000</double>
+      </property>
+      <property name="value">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="doubleSpinBoxOffsetY">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>30</y>
+        <width>69</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <double>-1000.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>1000.000000000000000</double>
+      </property>
+      <property name="value">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>30</y>
+        <width>16</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_14">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>30</y>
+        <width>16</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Y</string>
       </property>
      </widget>
     </widget>

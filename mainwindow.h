@@ -42,6 +42,7 @@ private slots:
     void saveHFtojpg();
     void afficheImage();
     void afficheImageNoise();
+    void saveNFtoImg();
     void upScale();
     void downScale();
 };

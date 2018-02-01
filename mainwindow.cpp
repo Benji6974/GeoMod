@@ -27,6 +27,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->btn_showImageNoise, SIGNAL (released()), this, SLOT (afficheImageNoise()));
     connect(ui->btn_moins, SIGNAL (released()), this, SLOT (downScale()));
     connect(ui->btn_plus, SIGNAL (released()), this, SLOT (upScale()));
+    connect(ui->btn_save_noise, SIGNAL (released()), this, SLOT (saveNFtoImg()));
+
 
 
 
@@ -106,6 +108,7 @@ void MainWindow::afficheImage(){
 void MainWindow::afficheImageNoise(){
 
     std::cout << "generateNoise" << std::endl;
+    nf.parameters.setOffset(vec2(ui->doubleSpinBoxOffsetX->value(),ui->doubleSpinBoxOffsetY->value()));
     nf.parameters.setOctaves(ui->spinBoxOctaves->value());
     nf.parameters.setAmplitude(ui->doubleSpinBoxAmplitude->value());
     nf.parameters.setFrequence(ui->doubleSpinBoxFrequence->value());
@@ -125,6 +128,19 @@ void MainWindow::afficheImageNoise(){
     ui->labelImage->setPixmap(qpix);
     ui->labelImage->adjustSize();
     ui->labelImage->setScaledContents(true);
+}
+
+void MainWindow::saveNFtoImg()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
+                                                                             "",
+                                                                             tr("Images (*.bmp);;Images (*.jpg);;Images (*.png);;Images (*.ppm);;Images (*.tif);;Images (*.xbm);;Images (*.xpm)"));
+    int res = nf.saveImg(fileName);
+
+   if (res)
+       QMessageBox::information(this, "OK", "Fichier sauvegardée");
+   else
+       QMessageBox::critical(this, "Erreur", "Erreur lors de l'enregistrement");
 }
 
 

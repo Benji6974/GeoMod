@@ -11,11 +11,11 @@
 
 typedef struct Param
 {
-    Param() : octaves(1), frequence(1.f), amplitude(1.f),
+    Param() : offset(vec2(0.f,0.f)), octaves(1), frequence(1.f), amplitude(1.f),
         lacunarity(2.f), persistance(0.5f)
     {}
 
-    Param(int oct, float freq, float a, float lac, float pers) : octaves(oct), frequence(freq), amplitude(a),
+    Param(vec2 pos, int oct, float freq, float a, float lac, float pers) : offset(pos), octaves(oct), frequence(freq), amplitude(a),
         lacunarity(lac), persistance(pers)
     {}
 
@@ -45,6 +45,12 @@ typedef struct Param
         this->persistance = pers;
     }
 
+    void setOffset(vec2 pos)
+    {
+        this->offset = pos;
+    }
+
+    vec2 offset;
     int octaves;
     float frequence;
     float amplitude;
@@ -62,10 +68,11 @@ public:
 
     Param parameters;
 private:
-    float noise(vec2 point);
+    float perlinNoise(vec2 point);
+    void regenerateHash(int s);
 
     int seed;
-    static int hash[512];
+    std::vector<int> hash;
     static int hashMask;
     static vec2 gradients2D[8];
     static int gradientsMask2D;
