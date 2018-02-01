@@ -14,6 +14,15 @@ struct vec3;
 struct vec4;
 struct Vector;
 
+struct vec2i
+{
+    vec2i() : x(0), y(0) {}
+    vec2i(int x, int y) : x(x), y(y) {}
+
+    int x;
+    int y;
+};
+
 //! representation d'un point 3d.
 struct Point
 {

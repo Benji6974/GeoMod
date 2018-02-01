@@ -2,6 +2,10 @@
 #define LAYERFIELD_H
 #include "heightField.h"
 
+#include <deque>
+#include <random>
+#include <cmath>
+
 class LayerField : public HeightField
 {
 public:
@@ -23,13 +27,15 @@ public:
     double slope(int i, int j);
     void calculSlope();
     void calculWetness(float param);
+    void calculErosion();
+    void stabilization();
 
     ScalarField slopeField;
     ScalarField drainageField;
     ScalarField wetnessField;
     ScalarField luxField;
 private:
-
+    double getTanAngle(int x1, int y1, int x2, int y2);
 
 };
 
