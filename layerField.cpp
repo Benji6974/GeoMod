@@ -111,6 +111,7 @@ void LayerField::ecoulement(){
 }
 
 void LayerField::majVoisinEcoulement(vec3 pos){
+    /*
     std::vector<vec2> v = std::vector<vec2>();
     if (pos.x+1 < nx){
         v.push_back(vec2(pos.x+1,pos.y));
@@ -130,6 +131,27 @@ void LayerField::majVoisinEcoulement(vec3 pos){
         v.push_back(vec2(pos.x,pos.y+1));
     if (pos.y-1 > 0)
         v.push_back(vec2(pos.x,pos.y-1));
+
+
+    double somme=0;
+    for(unsigned int i = 0; i<v.size(); i++){
+        if (getZ(v[i].x,v[i].y) < getZ(pos.x,pos.y) )
+            somme += slopeField.getZ(v[i].x,v[i].y);
+    }
+    if (somme != 0.0){
+        double val = drainageField.getZ(pos.x,pos.y);
+        for(unsigned int i = 0; i<v.size(); i++){
+            if (getZ(v[i].x,v[i].y) < getZ(pos.x,pos.y)){
+                double pourcentage = (slopeField.getZ(v[i].x,v[i].y))/(somme);
+                drainageField.setZ(v[i].x,v[i].y,drainageField.getZ(v[i].x,v[i].y)+(val*pourcentage));
+
+            }
+        }
+
+    }
+    */
+    std::vector<vec2i> v;
+    getVoisin((int) pos.x, (int) pos.y, v);
 
     double somme=0;
     for(unsigned int i = 0; i<v.size(); i++){
@@ -176,6 +198,86 @@ void LayerField::calculWetness(float param){
         }
     }
 }
+
+
+void LayerField::calculErosion() //on considère l'érosion sur une année
+{
+    //tempo luminance
+    ScalarField luminanceField(nx,ny,a,b);
+    double removeBrMax = 1.0; //1 mètre si lum = 100%
+    for(int x = 0 ; x < this->nx ; x++){
+        for(int y = 0 ; y < this->ny ; y++){
+            double removeValue = removeBrMax*luminanceField.getZ(x,y);
+            br.setZ(x,y, br.getZ(x,y) -  removeValue);
+            sable.setZ(x,y, sable.getZ(x,y) + removeValue);
+        }
+    }
+
+}
+
+double LayerField::getTanAngle(int x1, int y1, int x2, int y2)
+{
+    //on considère en z que x1,y1 > x2,y2
+    double diffH = abs(getZ(x1, y1) - getZ(x2, y2));
+    //double diffXY = abs(Vertex(x1, y1) - Vertex(x2, y2));
+    double diffXY = 1;
+    return diffH / diffXY;
+}
+
+void LayerField::stabilization()
+{
+    std::vector<int> randValueX;
+    randValueX.resize(nx);
+    std::vector<int> randValueY;
+    randValueY.resize(ny);
+
+    std::iota(randValueX.begin(), randValueX.end(), 0);
+    std::default_random_engine engine(4856);
+    std::shuffle(randValueX.begin(), randValueX.end(), engine);
+    std::iota(randValueY.begin(), randValueY.end(), 0);
+    std::default_random_engine engine2(1247);
+    std::shuffle(randValueY.begin(), randValueY.end(), engine2);
+
+    double alphaMax = 40;
+    double epsilon = 0.1;
+    double sableRemove;
+
+    std::vector<vec2i> voisins;
+    for(int x = 0 ; x < this->nx ; x++){
+        for(int y = 0 ; y < this->ny ; y++){
+
+            getVoisin(randValueX[x],randValueY[y], voisins);
+            std::default_random_engine engine3(randValueX[x] + randValueY[y]);
+            std::shuffle(voisins.begin(), voisins.end(), engine3);//on parcours les voisins au hasard
+
+            for(int i = 0 ; i < voisins.size() ; i++)
+            {
+                //si il reste pas assez de sable a ecouler on stoppe
+                if(sable.getZ(randValueX[x],randValueY[y]) < epsilon)
+                    break;
+
+                //si le voisin est plus bas
+                if(getZ(randValueX[x],randValueY[y]) > getZ(voisins[i].x,voisins[i].y))
+                {
+                    sableRemove = 0;
+
+                    double result = getTanAngle(randValueX[x], randValueY[y],voisins[i].x, voisins[i].y);
+                    if(result > tan(alphaMax)) //eboulement
+                    {
+                        double sableRemove = epsilon;
+                        sable.setZ(randValueX[x],randValueY[y], getZ(randValueX[x],randValueY[y]) - sableRemove);
+                        sable.setZ(voisins[i].x,voisins[i].y, getZ(voisins[i].x,voisins[i].y) + sableRemove);
+
+                        setZ(randValueX[x],randValueY[y], getZ(randValueX[x],randValueY[y]) - sableRemove);
+                        setZ(voisins[i].x,voisins[i].y, getZ(voisins[i].x,voisins[i].y) + sableRemove);
+                    }
+                }
+            }
+
+        }
+    }
+}
+
 
 void LayerField::calculLumiere(int nbSrcLum, int nbPas){
     luxField.setAllZ(0);
@@ -237,6 +339,4 @@ void LayerField::calculLumiere(int nbSrcLum, int nbPas){
     }
 
 }
-
-
 

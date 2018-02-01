@@ -3,7 +3,6 @@
 
 #include "vec.h"
 
-
 float distance( const Point& a, const Point& b )
 {
     return length(a - b);

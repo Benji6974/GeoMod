@@ -80,49 +80,30 @@ double ScalarField::height(const vec2& p){
     return InterpolationBilineaire(uv,pij.z,heightGrid(nu,nv+1),
                                    heightGrid(nu+1,nv),
                                    heightGrid(nu+1,nv+1));
-    /*
-    int nu=int(uv.x*nx);
-    int nv=int(uv.y*ny);
-
-    vec3 q11 = P(nu,nv);
-    vec3 q21 = P(nu+1,nv);
-    vec3 q12 = P(nu,nv+1);
-    vec3 q22 = P(nu+1,nv+1);
-
-    float dx = p.x - q11.x;
-    float dy = p.y - q11.y;
-    float sigmaX = q22.x - q11.x;
-    float sigmaY = q22.y - q11.y;
-
-    double sigmaFx = q21.z - q11.z;
-    double sigmaFy = q12.z - q11.z;
-    double sigmaFxy = q11.z + q22.z - q21.z - q12.z;
-
-    return sigmaFx*(dx/sigmaX)+sigmaFy*(dy/sigmaY)+sigmaFxy*(dx/sigmaX)*(dy/sigmaY)+q11.z;
-    */
-    //interpolation triangulaire (non fonctionelle)
-    /*
-    //coordonées locales
-    double u=(x-a.x)/(b.x-a.x);
-    double v=(y-a.y)/(b.y-a.y);
-
-    //location de la celulle sur la grille
-    int nu=int(u*nx);
-    int nv=int(v*ny);
-
-    //coordonées locale sur la cellule
-    u=u-nu*(b.x-a.x)/nx;
-    v=v-nv*(b.y-a.y)/ny;
-
-    if(u+v<1){
-        return (1-u-v)*heightGrid(nu,nv)+u*heightGrid(nu+1,nv)+v*heightGrid(nu,nv+1); // completement pourri son code y'a pas de i ni de j !!!
-    }else{
-        return (u+v-1)*heightGrid(nu+1,nv+1)+(1-v)*heightGrid(nu+1,nv)+(1-u)*heightGrid(nu,nv+1);
-    }
-    */
 }
 
-
+void ScalarField::getVoisin(int x, int y, std::vector<vec2i> &voisins)
+{
+    voisins.clear();
+    if (x+1 < nx){
+        voisins.push_back(vec2i(x+1,y));
+        if (y+1 < ny)
+            voisins.push_back(vec2i(x+1,y+1));
+        if (y-1 > 0)
+            voisins.push_back(vec2i(x+1,y-1));
+    }
+    if (x-1 > 0){
+        voisins.push_back(vec2i(x-1,y));
+        if (y+1 < ny)
+            voisins.push_back(vec2i(x-1,y+1));
+        if (y-1 > 0)
+            voisins.push_back(vec2i(x-1,y-1));
+    }
+    if (y+1 < ny)
+        voisins.push_back(vec2i(x,y+1));
+    if (y-1 > 0)
+        voisins.push_back(vec2i(x,y-1));
+}
 
 
 void ScalarField::load(QString pathFile, vec2 a, vec2  b, float za, float zb){
