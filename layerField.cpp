@@ -286,14 +286,14 @@ void LayerField::calculLumiere(int nbSrcLum, int nbPas){
     //vec2 centre = getCenter();
     //VAR_TYPE radius = distance(centre, a) + distance(centre, a)/10;
     vec3 center = vec3(b.x/2,b.y/2, 0.0);
-    float radius = (a.x/2)*1.01;
+    float radius = (b.x/2)*1.01;
 
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::mt19937 generator(seed);
     std::uniform_real_distribution<double> uniform(0.0, 1.0);
 
     std::vector<vec3> listPoints(nbSrcLum);
-    std::cout<< "coucou"<<endl;
+
     for(int i = 0; i < nbSrcLum; ++i) {
         double theta = 2 * M_PI * uniform(generator);
         double phi = acos(1 - 2 * uniform(generator));
@@ -311,13 +311,13 @@ void LayerField::calculLumiere(int nbSrcLum, int nbPas){
 
         listPoints[i] = point;
     }
-
+    std::cout<<"rayon "<<radius<<std::endl;
 
     // Lancer de rayons
     for (int i = 0; i < this->nx; i++) {
         for (int j = 0; j < this->ny; j++) {
             vec3 depart(P(i,j));
-
+            //std::cout<< "coucou"<<endl;
             for(unsigned int p = 0; p < listPoints.size(); ++p) {
                 vec3 rayon = listPoints[p] - depart;
                 bool visible = true;

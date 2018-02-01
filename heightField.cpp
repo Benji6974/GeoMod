@@ -261,10 +261,9 @@ std::vector<vec3> HeightField::tri(){
 }
 
 bool HeightField::underTerrain(vec3 & vec){
-    double height;
     if(vec.x >= a.x && vec.x <= b.x && vec.y >= a.y && vec.y <= b.y) {
-
-        return vec.z < getZ(vec.x, vec.y);
+        //cout<<"x "<<vec.x<<"y "<< vec.y<<endl;
+        return vec.z < height(vec2(vec.x, vec.y));
     }
     return false;
 }
