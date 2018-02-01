@@ -211,7 +211,8 @@ double LayerField::getTanAngle(int x1, int y1, int x2, int y2)
 {
     //on considère en z que x1,y1 > x2,y2
     double diffH = abs(getZ(x1, y1) - getZ(x2, y2));
-    double diffXY = abs(Vertex(x1, y1) - Vertex(x2, y2));
+    //double diffXY = abs(Vertex(x1, y1) - Vertex(x2, y2));
+    double diffXY = 1;
     return diffH / diffXY;
 }
 
@@ -248,7 +249,7 @@ void LayerField::stabilization()
                     break;
 
                 //si le voisin est plus bas
-                if(getZ(randValueX[x],randValueY[y]) > getZ(voisins[x],voisins[y]))
+                if(getZ(randValueX[x],randValueY[y]) > getZ(voisins[i].x,voisins[i].y))
                 {
                     sableRemove = 0;
 
