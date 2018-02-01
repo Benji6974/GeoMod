@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->btn_moins, SIGNAL (released()), this, SLOT (downScale()));
     connect(ui->btn_plus, SIGNAL (released()), this, SLOT (upScale()));
     connect(ui->btn_save_noise, SIGNAL (released()), this, SLOT (saveNFtoImg()));
-
+    connect(ui->btn_calcErosion, SIGNAL (released()), this, SLOT (calculErosion()));
 
 
 
@@ -263,6 +263,14 @@ void MainWindow::saveHFtojpg(){
         QMessageBox::critical(this, "Erreur", "Erreur lors de l'enregistrement");
 
 
+}
+
+void MainWindow::calculErosion()
+{
+    std::cout << "calculErosion" << std::endl;
+    lf.calculErosion();
+    ui->openGLWidget->paintGL();
+    ui->openGLWidget->updateGL();
 }
 
 MainWindow::~MainWindow()

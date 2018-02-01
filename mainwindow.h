@@ -45,6 +45,7 @@ private slots:
     void saveNFtoImg();
     void upScale();
     void downScale();
+    void calculErosion();
 };
 
 #endif // MAINWINDOW_H

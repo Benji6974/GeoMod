@@ -202,17 +202,15 @@ void LayerField::calculWetness(float param){
 
 void LayerField::calculErosion() //on considère l'érosion sur une année
 {
-    //tempo luminance
-    ScalarField luminanceField(nx,ny,a,b);
     double removeBrMax = 1.0; //1 mètre si lum = 100%
     for(int x = 0 ; x < this->nx ; x++){
         for(int y = 0 ; y < this->ny ; y++){
-            double removeValue = removeBrMax*luminanceField.getZ(x,y);
+            double removeValue = removeBrMax*luxField.getZ(x,y);
             br.setZ(x,y, br.getZ(x,y) -  removeValue);
             sable.setZ(x,y, sable.getZ(x,y) + removeValue);
         }
     }
-
+    stabilization();
 }
 
 double LayerField::getTanAngle(int x1, int y1, int x2, int y2)
@@ -240,7 +238,6 @@ void LayerField::stabilization()
 
     double alphaMax = 40;
     double epsilon = 0.1;
-    double sableRemove;
 
     std::vector<vec2i> voisins;
     for(int x = 0 ; x < this->nx ; x++){
@@ -250,7 +247,7 @@ void LayerField::stabilization()
             std::default_random_engine engine3(randValueX[x] + randValueY[y]);
             std::shuffle(voisins.begin(), voisins.end(), engine3);//on parcours les voisins au hasard
 
-            for(int i = 0 ; i < voisins.size() ; i++)
+            for(unsigned int i = 0 ; i < voisins.size() ; i++)
             {
                 //si il reste pas assez de sable a ecouler on stoppe
                 if(sable.getZ(randValueX[x],randValueY[y]) < epsilon)
@@ -259,17 +256,15 @@ void LayerField::stabilization()
                 //si le voisin est plus bas
                 if(getZ(randValueX[x],randValueY[y]) > getZ(voisins[i].x,voisins[i].y))
                 {
-                    sableRemove = 0;
 
                     double result = getTanAngle(randValueX[x], randValueY[y],voisins[i].x, voisins[i].y);
                     if(result > tan(alphaMax)) //eboulement
                     {
-                        double sableRemove = epsilon;
-                        sable.setZ(randValueX[x],randValueY[y], getZ(randValueX[x],randValueY[y]) - sableRemove);
-                        sable.setZ(voisins[i].x,voisins[i].y, getZ(voisins[i].x,voisins[i].y) + sableRemove);
+                        sable.setZ(randValueX[x],randValueY[y], getZ(randValueX[x],randValueY[y]) - epsilon);
+                        sable.setZ(voisins[i].x,voisins[i].y, getZ(voisins[i].x,voisins[i].y) + epsilon);
 
-                        setZ(randValueX[x],randValueY[y], getZ(randValueX[x],randValueY[y]) - sableRemove);
-                        setZ(voisins[i].x,voisins[i].y, getZ(voisins[i].x,voisins[i].y) + sableRemove);
+                        setZ(randValueX[x],randValueY[y], getZ(randValueX[x],randValueY[y]) - epsilon);
+                        setZ(voisins[i].x,voisins[i].y, getZ(voisins[i].x,voisins[i].y) + epsilon);
                     }
                 }
             }
