@@ -64,9 +64,11 @@ void LayerField::heightTotal(){
 void LayerField::changeNxNy(vec2 n){
     this->setNxNy(n);
         changeSizeZ();
+    this->setAllZ(0);
     for (unsigned int i=0; i<vec_HF.size(); i++){
        vec_HF[i]->setNxNy(n);
        vec_HF[i]->changeSizeZ();
+       vec_HF[i]->setAllZ(0);
     }
     slopeField.setNxNy(n);
     wetnessField.setNxNy(n);
@@ -79,6 +81,15 @@ void LayerField::changeNxNy(vec2 n){
     luxField.changeSizeZ();
     drainageField.changeSizeZ();
     streamPower.changeSizeZ();
+
+
+    slopeField.setAllZ(0);
+    wetnessField.setAllZ(0);
+    luxField.setAllZ(0);
+    drainageField.setAllZ(0);
+    streamPower.setAllZ(0);
+
+
 }
 
 void LayerField::changeAB(vec2 a, vec2 b){
@@ -118,45 +129,6 @@ void LayerField::ecoulement(){
 }
 
 void LayerField::majVoisinEcoulement(vec3 pos){
-    /*
-    std::vector<vec2> v = std::vector<vec2>();
-    if (pos.x+1 < nx){
-        v.push_back(vec2(pos.x+1,pos.y));
-        if (pos.y+1 < ny)
-            v.push_back(vec2(pos.x+1,pos.y+1));
-        if (pos.y-1 > 0)
-            v.push_back(vec2(pos.x+1,pos.y-1));
-    }
-    if (pos.x-1 > 0){
-        v.push_back(vec2(pos.x-1,pos.y));
-        if (pos.y+1 < ny)
-            v.push_back(vec2(pos.x-1,pos.y+1));
-        if (pos.y-1 > 0)
-            v.push_back(vec2(pos.x-1,pos.y-1));
-    }
-    if (pos.y+1 < ny)
-        v.push_back(vec2(pos.x,pos.y+1));
-    if (pos.y-1 > 0)
-        v.push_back(vec2(pos.x,pos.y-1));
-
-
-    double somme=0;
-    for(unsigned int i = 0; i<v.size(); i++){
-        if (getZ(v[i].x,v[i].y) < getZ(pos.x,pos.y) )
-            somme += slopeField.getZ(v[i].x,v[i].y);
-    }
-    if (somme != 0.0){
-        double val = drainageField.getZ(pos.x,pos.y);
-        for(unsigned int i = 0; i<v.size(); i++){
-            if (getZ(v[i].x,v[i].y) < getZ(pos.x,pos.y)){
-                double pourcentage = (slopeField.getZ(v[i].x,v[i].y))/(somme);
-                drainageField.setZ(v[i].x,v[i].y,drainageField.getZ(v[i].x,v[i].y)+(val*pourcentage));
-
-            }
-        }
-
-    }
-    */
     std::vector<vec2i> v;
     getVoisin((int) pos.x, (int) pos.y, v);
 
@@ -203,7 +175,9 @@ void LayerField::calculPowerStream(){
 }
 
 
+
 //weatness index W = ln(A/1+ks) k un param 1 2 ou plus en fonction de la pente pour l'accentuer ou non
+
 
 
 void LayerField::calculWetness(float param){
@@ -216,12 +190,13 @@ void LayerField::calculWetness(float param){
 }
 
 
-void LayerField::calculErosion() //on considère l'érosion sur une année
+void LayerField::calculErosion() //on considère l'érosion sur 10 ans (pour être le plus réaliste possible)
 {
-    double removeBrMax = 1.0; //1 mètre si lum = 100%
+    double removeBrMax = 0.5; //0.5 mètre si lum = 100%
     for(int x = 0 ; x < this->nx ; x++){
         for(int y = 0 ; y < this->ny ; y++){
-            double removeValue = removeBrMax*luxField.getZ(x,y);
+            double removeValue = std::max(0.0, removeBrMax*luxField.getZ(x,y) - sable.getZ(x,y));
+            removeValue = std::min(br.getZ(x,y), removeValue);
             br.setZ(x,y, br.getZ(x,y) -  removeValue);
             sable.setZ(x,y, sable.getZ(x,y) + removeValue);
         }
@@ -252,41 +227,61 @@ void LayerField::stabilization()
     std::default_random_engine engine2(1247);
     std::shuffle(randValueY.begin(), randValueY.end(), engine2);
 
-    double alphaMax = 40;
-    double epsilon = 0.1;
+    std::deque<vec2i> haveToUpdate;
 
-    std::vector<vec2i> voisins;
     for(int x = 0 ; x < this->nx ; x++){
         for(int y = 0 ; y < this->ny ; y++){
-
-            getVoisin(randValueX[x],randValueY[y], voisins);
-            std::default_random_engine engine3(randValueX[x] + randValueY[y]);
-            std::shuffle(voisins.begin(), voisins.end(), engine3);//on parcours les voisins au hasard
-
-            for(unsigned int i = 0 ; i < voisins.size() ; i++)
-            {
-                //si il reste pas assez de sable a ecouler on stoppe
-                if(sable.getZ(randValueX[x],randValueY[y]) < epsilon)
-                    break;
-
-                //si le voisin est plus bas
-                if(getZ(randValueX[x],randValueY[y]) > getZ(voisins[i].x,voisins[i].y))
-                {
-
-                    double result = getTanAngle(randValueX[x], randValueY[y],voisins[i].x, voisins[i].y);
-                    if(result > tan(alphaMax)) //eboulement
-                    {
-                        sable.setZ(randValueX[x],randValueY[y], getZ(randValueX[x],randValueY[y]) - epsilon);
-                        sable.setZ(voisins[i].x,voisins[i].y, getZ(voisins[i].x,voisins[i].y) + epsilon);
-
-                        setZ(randValueX[x],randValueY[y], getZ(randValueX[x],randValueY[y]) - epsilon);
-                        setZ(voisins[i].x,voisins[i].y, getZ(voisins[i].x,voisins[i].y) + epsilon);
-                    }
-                }
-            }
-
+            ecoulementVoisin(haveToUpdate, randValueX[x], randValueY[y], 40);
         }
     }
+
+    //on verifie l'écoulement sur les voisins mis a jour précédament
+    //on continue jusqu'a que tout soit stable = plus de point a vérifier
+    while(!haveToUpdate.empty())
+    {
+        vec2i pos = haveToUpdate.front();
+        ecoulementVoisin(haveToUpdate, pos.x, pos.y, 40);
+        haveToUpdate.pop_front();
+    }
+
+}
+
+void LayerField::ecoulementVoisin(std::deque<vec2i> & haveToUpdate, int x , int y, double angleMax)
+{
+    std::vector<vec2i> voisins;
+    getVoisin(x,y, voisins);
+    std::default_random_engine engine3(x + y);
+    std::shuffle(voisins.begin(), voisins.end(), engine3);
+
+    //on parcours les voisins au hasard
+    for(unsigned int i = 0 ; i < voisins.size() ; i++)
+    {
+        //si il reste pas de sable a ecouler on stoppe
+        if(sable.getZ(x,y) == 0)
+            break;
+
+        //si le voisin est plus bas
+        if(getZ(x,y) > getZ(voisins[i].x,voisins[i].y))
+        {
+
+            double result = getTanAngle(x, y,voisins[i].x, voisins[i].y) - tan(angleMax * M_PI / 180.0 );
+            if(result > 0) //eboulement
+            {
+                    //on calcule la quantite a deverser pour que l'angle obtenu ne dépasse plus angleMax
+                    double diffHOK = std::min(result / 2.0, sable.getZ(x,y));
+
+                    sable.setZ(x,y, sable.getZ(x,y) - diffHOK);
+                    sable.setZ(voisins[i].x,voisins[i].y, sable.getZ(voisins[i].x,voisins[i].y) + diffHOK);
+
+                    setZ(x,y, getZ(x,y) - diffHOK);
+                    setZ(voisins[i].x,voisins[i].y, getZ(voisins[i].x,voisins[i].y) + diffHOK);
+
+                    if(std::find(haveToUpdate.begin(), haveToUpdate.end(), vec2i(voisins[i].x, voisins[i].y)) == haveToUpdate.end())
+                        haveToUpdate.push_back(vec2i(voisins[i].x, voisins[i].y));
+            }
+        }
+    }
+
 }
 
 
@@ -349,5 +344,10 @@ void LayerField::calculLumiere(int nbSrcLum, int nbPas){
         }
     }
 
+}
+
+
+void LayerField::calculPoisson(){
+    arbres = vegetation.poisson(*this);
 }
 

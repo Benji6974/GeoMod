@@ -51,7 +51,6 @@ HEADERS += \
     gldisplay.h \
     mainwindow.h \
     noiseField.h \
-    veget.h \
     include/thinks/poissonDiskSampling.hpp
 
 FORMS += \

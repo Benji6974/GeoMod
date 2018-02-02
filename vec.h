@@ -19,6 +19,8 @@ struct vec2i
     vec2i() : x(0), y(0) {}
     vec2i(int x, int y) : x(x), y(y) {}
 
+    bool operator ==(const vec2i &b) const;
+
     int x;
     int y;
 };

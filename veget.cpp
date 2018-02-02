@@ -8,7 +8,7 @@ Veget::Veget()
                          vec2(40,100), //lumiere
                          vec2(0,40), //pente
                          vec2(0,20), //streampower
-                         10
+                         4
                          ));
     arbres.push_back(tree("pommier",
                         vec2(0,60), // hauteur
@@ -16,7 +16,7 @@ Veget::Veget()
                          vec2(50,100), //lumiere
                          vec2(0,20), //pente
                          vec2(0,20), //streampower
-                         15
+                         5
                          ));
 
 
@@ -29,7 +29,7 @@ double Veget::fcntTransfert(vec2 val, double test){
 }
 
 
-void Veget::poisson(LayerField lf){
+std::vector<vec3> Veget::poisson(LayerField &lf){
 
     Vec2f x_min;
     x_min[0] = lf.getA().x;
@@ -41,6 +41,7 @@ void Veget::poisson(LayerField lf){
     uint32_t seed = 9429;*/
     std::vector<Vec2f> samples = thinks::poissonDiskSampling(arbres[0].radius, x_min, x_max);
     std::vector<vec3> arbresPlantee;
+    std::cout <<"je vais planter "<<samples.size()<<" arbres"<<std::endl;
      for (unsigned int i = 0; i < samples.size(); ++i) {
          lf.height(vec2(samples[i][0],samples[i][0]));
          double rnd = ((double) rand() / (RAND_MAX));
@@ -55,13 +56,15 @@ void Veget::poisson(LayerField lf){
         for(int y=1; y< res.size(); y++){
             densiteVeget = std::min(densiteVeget,res[i]);
         }
+
          if (rnd < densiteVeget){
              arbresPlantee.push_back(vec3(samples[i][0],samples[i][1],lf.height(vec2(samples[i][0],samples[i][1]))));
          }
-
      }
 
-
-
-
+    std::cout <<"je j'ai trouver "<<arbresPlantee.size()<<" arbres a planter"<<std::endl;
+     for (int r =0;r< arbresPlantee.size();r++){
+         std::cout <<"Je plante un arbre "<<arbresPlantee[r].x <<" "<< arbresPlantee[r].y <<" "<< arbresPlantee[r].z<<std::endl;
+     }
+     return arbresPlantee;
 }

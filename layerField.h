@@ -1,7 +1,6 @@
 #ifndef LAYERFIELD_H
 #define LAYERFIELD_H
 #include "heightField.h"
-#include "veget.h"
 #include "include/thinks/poissonDiskSampling.hpp"
 
 #include <deque>
@@ -48,7 +47,7 @@ public:
     //void seLayerField(LayerField *lf);
     std::vector<tree> arbres;
     double fcntTransfert(vec2 val, double test);
-    void poisson(LayerField a);
+    std::vector<vec3> poisson(LayerField &a);
     //LayerField *lf;
 };
 
@@ -79,6 +78,7 @@ public:
     void stabilization();
     void calculLumiere(int nbSrcLum, int nbPas);
     void calculPowerStream();
+    void calculPoisson();
 
     Veget vegetation;
 
@@ -87,8 +87,11 @@ public:
     ScalarField wetnessField;
     ScalarField luxField;
     ScalarField streamPower;
+
+    std::vector<vec3> arbres;
 private:
     double getTanAngle(int x1, int y1, int x2, int y2);
+    void ecoulementVoisin(std::deque<vec2i> & haveToUpdate, int x , int y, double angleMax);
 
 };
 
