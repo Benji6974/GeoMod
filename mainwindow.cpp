@@ -91,6 +91,8 @@ void MainWindow::afficheImage(){
             img = lf.drainageField.getImage();
         if (ui->ck_humidite->isChecked())
             img = lf.wetnessField.getImage();
+        if (ui->ck_powerStream->isChecked())
+            img = lf.streamPower.getImage();
         if (ui->ck_lumiere->isChecked())
             img = lf.luxField.getImage();
         if (ui->ck_slope->isChecked())
@@ -148,6 +150,7 @@ void MainWindow::calculTot(){
     lf.heightTotal();
     lf.calculSlope();
     lf.ecoulement();
+    lf.calculPowerStream();
     lf.calculWetness(ui->humiditeFactor->value());
     lf.calculLumiere(ui->nb_points->value(), ui->pas->value());
 
@@ -249,6 +252,8 @@ void MainWindow::saveHFtojpg(){
             res = lf.drainageField.saveImg(fileName);
         if (ui->ck_humidite->isChecked())
             res = lf.wetnessField.saveImg(fileName);
+        if (ui->ck_powerStream->isChecked())
+            res = lf.streamPower.saveImg(fileName);
         if (ui->ck_lumiere->isChecked())
             res = lf.luxField.saveImg(fileName);
         if (ui->ck_slope->isChecked())

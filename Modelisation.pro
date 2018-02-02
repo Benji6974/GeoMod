@@ -35,7 +35,8 @@ SOURCES += main.cpp \
     array2.cpp \
     gldisplay.cpp \
     mainwindow.cpp \
-    noiseField.cpp
+    noiseField.cpp \
+    veget.cpp
 
 HEADERS += \
     vec.h \
@@ -49,7 +50,9 @@ HEADERS += \
     array2.h \
     gldisplay.h \
     mainwindow.h \
-    noiseField.h
+    noiseField.h \
+    veget.h \
+    include/thinks/poissonDiskSampling.hpp
 
 FORMS += \
     mainwindow.ui

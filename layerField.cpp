@@ -16,10 +16,14 @@ LayerField::LayerField(): LayerField(200,200,vec2(),vec2(301.f,301.f))
     wetnessField = ScalarField(200,200,vec2(),vec2(301.f,301.f));
     luxField = ScalarField(200,200,vec2(),vec2(301.f,301.f));
     drainageField = ScalarField(200,200,vec2(),vec2(301.f,301.f));
+    streamPower = ScalarField(200,200,vec2(),vec2(301.f,301.f));
+
     vec_HF.push_back(&br);
     vec_HF.push_back(&sable);
     vec_HF.push_back(&eau);
     vec_HF.push_back(&montagne);
+
+    vegetation = Veget();
 }
 
 void LayerField::affiche(std::string str){
@@ -68,12 +72,13 @@ void LayerField::changeNxNy(vec2 n){
     wetnessField.setNxNy(n);
     luxField.setNxNy(n);
     drainageField.setNxNy(n);
-
+    streamPower.setNxNy(n);
 
     slopeField.changeSizeZ();
     wetnessField.changeSizeZ();
     luxField.changeSizeZ();
     drainageField.changeSizeZ();
+    streamPower.changeSizeZ();
 }
 
 void LayerField::changeAB(vec2 a, vec2 b){
@@ -89,11 +94,13 @@ void LayerField::changeAB(vec2 a, vec2 b){
     wetnessField.setA(a);
     luxField.setA(a);
     drainageField.setA(a);
+    streamPower.setA(a);
 
     slopeField.setB(b);
     wetnessField.setB(b);
     luxField.setB(b);
     drainageField.setB(b);
+    streamPower.setB(b);
 
 }
 
@@ -182,6 +189,15 @@ void LayerField::calculSlope(){
     for(int x = 1 ; x < this->nx-1 ; x++){
         for(int y = 1 ; y < this->ny-1 ; y++){
            slopeField.setZ(x,y, slope(x, y));
+        }
+    }
+}
+
+void LayerField::calculPowerStream(){
+    streamPower.setAllZ(0);
+    for(int x = 1 ; x < this->nx-1 ; x++){
+        for(int y = 1 ; y < this->ny-1 ; y++){
+           streamPower.setZ(x,y, std::sqrt(drainageField.getZ(x, y))*slopeField.getZ(x, y));
         }
     }
 }
