@@ -38,7 +38,7 @@ public:
     ScalarField luxField;
 private:
     double getTanAngle(int x1, int y1, int x2, int y2);
-    void ecoulementVoisin(int x , int y, double angleMax);
+    void ecoulementVoisin(std::deque<vec2i> & haveToUpdate, int x , int y, double angleMax);
 
 };
 

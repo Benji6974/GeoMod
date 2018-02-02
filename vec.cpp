@@ -89,6 +89,11 @@ Vector cross( const Vector& u, const Vector& v )
         (u.x * v.y) - (u.y * v.x));
 }
 
+bool vec2i::operator ==(const vec2i &b) const
+{
+    return this->x == b.x && this->y == b.y;
+}
+
 float length( const vec2& v )
 {
     return sqrt(length2(v));
