@@ -107,7 +107,7 @@ void MainWindow::afficheImage(){
 
 void MainWindow::afficheImageNoise(){
 
-    std::cout << "generateNoise" << std::endl;
+    std::cout << "Begin generateNoise" << std::endl;
     nf.parameters.setOffset(vec2(ui->doubleSpinBoxOffsetX->value(),ui->doubleSpinBoxOffsetY->value()));
     nf.parameters.setOctaves(ui->spinBoxOctaves->value());
     nf.parameters.setAmplitude(ui->doubleSpinBoxAmplitude->value());
@@ -115,9 +115,15 @@ void MainWindow::afficheImageNoise(){
     nf.parameters.setLacunarity(ui->doubleSpinBoxLacunarite->value());
     nf.parameters.setPersistance(ui->doubleSpinBoxPersistance->value());
 
+
+    start = std::clock();
     nf.generate(ui->spinBoxSeed->value());
 
-    std::cout << "EndgenerateNoise" << std::endl;
+    duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
+
+    std::cout << "Time to execute : " << duration << std::endl;
+
+    std::cout << "End generateNoise" << std::endl;
 
     QImage img;
     img = nf.getImage();
@@ -268,8 +274,17 @@ void MainWindow::saveHFtojpg(){
 
 void MainWindow::calculErosion()
 {
-    std::cout << "calculErosion" << std::endl;
+    std::cout << "Debut calculErosion" << std::endl;
+
+    start = std::clock();
+
     lf.calculErosion();
+
+    duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
+
+    std::cout << "Time to execute : " << duration << std::endl;
+
+    std::cout << "Fin calculErosion" << std::endl;
     std::cout << "mise a jour des paramètres du terrain" << std::endl;
     lf.calculSlope();
     lf.ecoulement();

@@ -155,7 +155,7 @@ void LayerField::calculSlope(){
 }
 
 
-//weatness index W = ln(A/1+ks) k un param 1 2 ou plus en fonction de la pente pour l'accentuer ou non
+//wetness index W = ln(A/1+ks) k un param 1 2 ou plus en fonction de la pente pour l'accentuer ou non
 
 
 void LayerField::calculWetness(float param){
@@ -168,9 +168,9 @@ void LayerField::calculWetness(float param){
 }
 
 
-void LayerField::calculErosion() //on considère l'érosion sur une année
+void LayerField::calculErosion() //on considère l'érosion sur 10 ans (pour être le plus réaliste possible)
 {
-    double removeBrMax = 0.5; //1 mètre si lum = 100%
+    double removeBrMax = 0.5; //0.5 mètre si lum = 100%
     for(int x = 0 ; x < this->nx ; x++){
         for(int y = 0 ; y < this->ny ; y++){
             double removeValue = std::max(0.0, removeBrMax*luxField.getZ(x,y) - sable.getZ(x,y));

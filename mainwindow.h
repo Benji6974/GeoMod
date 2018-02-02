@@ -14,6 +14,7 @@
 #include <QFile>
 #include <QCheckBox>
 #include <QMessageBox>
+#include <ctime>
 
 namespace Ui {
 class MainWindow;
@@ -31,6 +32,8 @@ private:
     QGraphicsScene *scene;
     LayerField lf;
     NoiseField nf;
+    std::clock_t start;
+    double duration;
 
 private slots:
     void loadImage();
