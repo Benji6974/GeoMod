@@ -152,6 +152,7 @@ void MainWindow::calculTot(){
     lf.calculLumiere(ui->nb_points->value(), ui->pas->value());
 
     ui->groupBox_2->setEnabled(true);
+    ui->btn_calcErosion->setEnabled(true);
     ui->openGLWidget->paintGL();
     ui->openGLWidget->updateGL();
 }
@@ -269,8 +270,13 @@ void MainWindow::calculErosion()
 {
     std::cout << "calculErosion" << std::endl;
     lf.calculErosion();
-    ui->openGLWidget->paintGL();
-    ui->openGLWidget->updateGL();
+    std::cout << "mise a jour des paramètres du terrain" << std::endl;
+    lf.calculSlope();
+    lf.ecoulement();
+    lf.calculWetness(ui->humiditeFactor->value());
+    lf.calculLumiere(ui->nb_points->value(), ui->pas->value());
+
+    afficheImage();
 }
 
 MainWindow::~MainWindow()
