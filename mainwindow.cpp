@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->btn_save_noise, SIGNAL (released()), this, SLOT (saveNFtoImg()));
     connect(ui->btn_calcErosion, SIGNAL (released()), this, SLOT (calculErosion()));
     connect(ui->btn_calculVegetation, SIGNAL (released()), this, SLOT (calculVegetation()));
+    connect(ui->btn_afficheVegetation, SIGNAL (released()), this, SLOT (afficheVegetation()));
 
 
 
@@ -63,6 +64,18 @@ MainWindow::MainWindow(QWidget *parent) :
      nf = NoiseField(n.x,n.y,vec2(0,0),vec2(1,1));
 
     ui->openGLWidget->aff = "br";
+}
+
+void MainWindow::afficheVegetation(){
+    QImage img = lf.getImageArbres();
+
+
+    QPixmap qpix = QPixmap::fromImage(img);
+    QSize labelSize = ui->labelImage->size();
+    qpix = qpix.scaled(labelSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
+    ui->labelImage->setPixmap(qpix);
+    ui->labelImage->adjustSize();
+    ui->labelImage->setScaledContents(true);
 }
 
 

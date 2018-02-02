@@ -47,8 +47,11 @@ public:
     //void seLayerField(LayerField *lf);
     std::vector<tree> arbres;
     double fcntTransfert(vec2 val, double test);
-    std::vector<vec3> poisson(LayerField &a);
-    //LayerField *lf;
+    void poisson(LayerField &a);
+    void afficheArbres();
+    QImage getImageArbres(LayerField &lf);
+
+    std::vector<vec3> arbresPlantee;
 };
 
 
@@ -79,6 +82,7 @@ public:
     void calculLumiere(int nbSrcLum, int nbPas);
     void calculPowerStream();
     void calculPoisson();
+    QImage getImageArbres();
 
     Veget vegetation;
 
@@ -88,7 +92,6 @@ public:
     ScalarField luxField;
     ScalarField streamPower;
 
-    std::vector<vec3> arbres;
 private:
     double getTanAngle(int x1, int y1, int x2, int y2);
     void ecoulementVoisin(std::deque<vec2i> & haveToUpdate, int x , int y, double angleMax);

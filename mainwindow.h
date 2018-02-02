@@ -50,6 +50,7 @@ private slots:
     void downScale();
     void calculErosion();
     void calculVegetation();
+    void afficheVegetation();
 };
 
 #endif // MAINWINDOW_H

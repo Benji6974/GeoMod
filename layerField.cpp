@@ -27,6 +27,7 @@ LayerField::LayerField(): LayerField(200,200,vec2(),vec2(301.f,301.f))
 }
 
 void LayerField::affiche(std::string str){
+
     if (str == "br")
         br.affiche();
     else if(str == "sable")
@@ -39,7 +40,7 @@ void LayerField::affiche(std::string str){
         this->affiche();
     }else
         return;
-
+    vegetation.afficheArbres();
 }
 void LayerField::affiche(){
     HeightField::affiche();
@@ -348,6 +349,10 @@ void LayerField::calculLumiere(int nbSrcLum, int nbPas){
 
 
 void LayerField::calculPoisson(){
-    arbres = vegetation.poisson(*this);
+    vegetation.poisson(*this);
+}
+
+QImage LayerField::getImageArbres(){
+    return vegetation.getImageArbres(*this);
 }
 
